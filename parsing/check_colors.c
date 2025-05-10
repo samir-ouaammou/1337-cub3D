@@ -1,24 +1,25 @@
 #include "../cub3D.h"
 
-//void	ft_check_colors_is_valid(t_parsing *data, char *str, int nbr)
-//{
-//	str = ft_strtrim(str, " \n");
-//	data->split = ft_split(str, ' ');
-//	if (!data->split)
-//		ft_print_error("Error\nMemory allocation failed (malloc)\n");
-//	if (nbr == 4)
-//		ft_check_floor_color(data);
-//	else if (nbr == 5)
-//		ft_check_ceiling_color(data);
-//}
-
-void	ft_check_floor_color(t_parsing *data)
+short	ft_count_commas(char *str)
 {
-	//if (ft_count_len(data->split) != 2 || ft_strcmp(data->split[0], "F"))
-	//{
-	//	write (2, "Error\nInvalid floor color format — ", 37);
-	//	ft_print_error("Example: F 220,100,0\n");
-	//}
+	short	count;
+	short	i;
+
+	if (!str)
+		return (0);
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+void	ft_check_floor_color(t_parsing *data, char *str)
+{
 	if (data->data->floor_color[0] != -1)
 	{
 		write (2, "Error\nDuplicate color identifier: ", 34);
@@ -28,10 +29,10 @@ void	ft_check_floor_color(t_parsing *data)
 	data->split = ft_split(data->split[1], ',');
 	if (!data->split)
 		ft_print_error("Error\nMemory allocation failed (malloc)\n");
-	if (ft_count_len(data->split) != 3)
+	if (ft_count_len(data->split) != 3 || ft_count_commas(str) != 2)
 	{
-		write (2, "Error\nInvalid floor color format — ", 37);
-		ft_print_error("Example: F 220,100,0\n");
+		write (2, "Error\nInvalid RGB format for floor color. ", 42);
+		ft_print_error("Expected format: F R,G,B\n");
 	}
 	data->data->floor_color[0] = ft_atoi(data->split[0]);
 	data->data->floor_color[1] = ft_atoi(data->split[1]);
@@ -45,13 +46,8 @@ void	ft_check_floor_color(t_parsing *data)
 	}
 }
 
-void	ft_check_ceiling_color(t_parsing *data)
+void	ft_check_ceiling_color(t_parsing *data, char *str)
 {
-	//if (ft_count_len(data->split) != 2 || ft_strcmp(data->split[0], "C"))
-	//{
-	//	write (2, "Error\nInvalid ceiling color format — ", 39);
-	//	ft_print_error("Example: C 225,30,0\n");
-	//}
 	if (data->data->ceiling_color[0] != -1)
 	{
 		write (2, "Error\nDuplicate color identifier: ", 34);
@@ -61,10 +57,10 @@ void	ft_check_ceiling_color(t_parsing *data)
 	data->split = ft_split(data->split[1], ',');
 	if (!data->split)
 		ft_print_error("Error\nMemory allocation failed (malloc)\n");
-	if (ft_count_len(data->split) != 3)
+	if (ft_count_len(data->split) != 3 || ft_count_commas(str) != 2)
 	{
-		write (2, "Error\nInvalid ceiling color format — ", 37);
-		ft_print_error("Example: C 225,30,0\n");
+		write (2, "Error\nInvalid RGB format for Ceiling color. ", 42);
+		ft_print_error("Expected format: F R,G,B\n");
 	}
 	data->data->ceiling_color[0] = ft_atoi(data->split[0]);
 	data->data->ceiling_color[1] = ft_atoi(data->split[1]);

@@ -1,21 +1,5 @@
 #include "../cub3D.h"
 
-//void	ft_check_texture_is_valid(t_parsing *data, char *str, int nbr)
-//{
-//	str = ft_strtrim(str, " \n");
-//	data->split = ft_split(str, ' ');
-//	if (!data->split)
-//		ft_print_error("Error\nMemory allocation failed (malloc)\n");
-//	if (nbr == 0)
-//		ft_check_path_to_the_north_texture_is_valid(data);
-//	else if (nbr == 1)
-//		ft_check_path_to_the_south_texture_is_valid(data);
-//	else if (nbr == 2)
-//		ft_check_path_to_the_west_texture_is_valid(data);
-//	else if (nbr == 3)
-//		ft_check_path_to_the_east_texture_is_valid(data);
-//}
-
 void	ft_check_path_to_the_north_texture_is_valid(t_parsing *data)
 {
 	int	width;

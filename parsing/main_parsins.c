@@ -71,6 +71,8 @@ t_map_config	*ft_parsing_map_file(t_map_config *map, char *filename)
 	if (data.fd == -1)
 		ft_print_error("Error\nError opening file map\n");
 	ft_read_map_file(&data, 0, 0);
+	if (!data.str || !data.str[0])
+		ft_print_error("Error\nMap file is empty. Please provide a valid map.\n");
 	data.map = ft_split(data.str, '\n');
 	ft_check_elements(data.map, -1, -1, ft_count_len(data.map));
 	ft_player_location_and_map_size(&data, data.map);

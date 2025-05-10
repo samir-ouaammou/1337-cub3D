@@ -41,9 +41,9 @@ void	ft_parse_config_line(t_parsing *data)
 	else if (!ft_strcmp(data->split[0], "EA"))
 		ft_check_path_to_the_east_texture_is_valid(data);
 	else if (!ft_strcmp(data->split[0], "F"))
-		ft_check_floor_color(data);
+		ft_check_floor_color(data, data->split[1]);
 	else if (!ft_strcmp(data->split[0], "C"))
-		ft_check_ceiling_color(data);
+		ft_check_ceiling_color(data, data->split[1]);
 	else
 		ft_print_map();
 }
@@ -64,7 +64,7 @@ void	ft_read_map_file(t_parsing *data, short nbr, short bol)
 		if (data->line[0] != '\n')
 		{
 			if (bol == 42 && ft_strtrim(data->line, " \t\n\v\f\r"))
-				ft_print_error("Erro\nThere is a blank line in the map.\n");
+				ft_print_error("Error\nInvalid map: the map contains errors.\n");
 			if (nbr < 6)
 				ft_parse_config_line(data);
 			else
