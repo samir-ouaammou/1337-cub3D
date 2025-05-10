@@ -16,7 +16,10 @@ void	ft_read_map_file(t_parsing *data, short nbr, short bol)
 		if (data->line[0] != '\n')
 		{
 			if (bol == 42 && ft_strtrim(data->line, " \t\n\v\f\r"))
-				ft_print_error("Error\nInvalid map: the map contains errors.\n");
+			{
+				write (2, "Error\nInvalid map: ", 19);
+				ft_print_error("the map contains errors.\n");
+			}
 			if (nbr < 6)
 				ft_parse_config_line(data);
 			else

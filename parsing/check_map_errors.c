@@ -36,8 +36,6 @@ void	ft_check_map(char **map, short i, short j, short player)
 
 void	ft_check_elements(char **map, size_t i, size_t j, size_t len)
 {
-	
-
 	i = -1;
 	while (map[++i])
 	{
