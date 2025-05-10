@@ -13,6 +13,7 @@ int main(int ac, char **av)
     map = ft_malloc(sizeof(t_map_config));
     if (!map)
         ft_print_error("Error\nMemory allocation failed (malloc)\n");
+    ft_init_map_config(map);
     map->mlx = NULL;
     map->mlx = mlx_init();
     if (!map->mlx)

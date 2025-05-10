@@ -1,5 +1,25 @@
 #include "../cub3D.h"
 
+void	ft_init_map_config(t_map_config *data)
+{
+	data->mlx = NULL;
+	data->no_texture = NULL;
+	data->so_texture = NULL;
+	data->we_texture = NULL;
+	data->ea_texture = NULL;
+	data->map = NULL;
+	data->floor_color[0] = -1;
+	data->floor_color[1] = -1;
+	data->floor_color[2] = -1;
+	data->ceiling_color[0] = -1;
+	data->ceiling_color[1] = -1;
+	data->ceiling_color[2] = -1;
+	data->map_width = 0;
+	data->map_height = 0;
+	data->player_x = -1;
+	data->player_y = -1;
+}
+
 void	ft_init_parsing(t_parsing *data)
 {
 	data->line = NULL;
@@ -7,6 +27,21 @@ void	ft_init_parsing(t_parsing *data)
 	data->tmp = NULL;
 	data->str = NULL;
 	data->map = NULL;
+}
+
+void	ft_print_map(void)
+{
+	write (2, "Error\nInvalid map format — please ensure the map is ", 54);
+	write (2, "properly enclosed and contains valid characters only.\n", 54);
+	write (2, "MAP FOR EXMPLE:\n", 16);
+	write (2, "NO ./textures/path_to_the_north_texture.xpm\n", 44);
+	write (2, "SO ./textures/path_to_the_south_texture.xpm\n", 44);
+	write (2, "EA ./textures/path_to_the_east_texture.xpm\n", 43);
+	write (2, "WE ./textures/path_to_the_west_texture.xpm\n\n", 44);
+	write (2, "F 220,100,0\nC 225,30,0\n\n", 24);
+	write (2, "111111111111111\n10000D000001001\n", 32);
+	write (2, "1N1101000101001\n111111111111111\n", 32);
+	ft_exit(-1);
 }
 
 void	ft_print_error(char *str)

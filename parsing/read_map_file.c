@@ -24,6 +24,30 @@ char	*ft_replace_whitespace_with_space(char *str)
 	return (res);
 }
 
+void	ft_parse_config_line(t_parsing *data)
+{
+	data->line = ft_strtrim(data->line, " \n");
+	data->split = ft_split(data->line, ' ');
+	if (!data->split)
+		ft_print_error("Error\nMemory allocation failed (malloc)\n");
+	if (ft_count_len(data->split) != 2)
+		ft_print_map();
+	if (!ft_strcmp(data->split[0], "NO"))
+		ft_check_path_to_the_north_texture_is_valid(data);
+	else if (!ft_strcmp(data->split[0], "SO"))
+		ft_check_path_to_the_south_texture_is_valid(data);
+	else if (!ft_strcmp(data->split[0], "WE"))
+		ft_check_path_to_the_west_texture_is_valid(data);
+	else if (!ft_strcmp(data->split[0], "EA"))
+		ft_check_path_to_the_east_texture_is_valid(data);
+	else if (!ft_strcmp(data->split[0], "F"))
+		ft_check_floor_color(data);
+	else if (!ft_strcmp(data->split[0], "C"))
+		ft_check_ceiling_color(data);
+	else
+		ft_print_map();
+}
+
 void	ft_read_map_file(t_parsing *data, short nbr, short bol)
 {
 	ft_init_parsing(data);
@@ -41,10 +65,8 @@ void	ft_read_map_file(t_parsing *data, short nbr, short bol)
 		{
 			if (bol == 42 && ft_strtrim(data->line, " \t\n\v\f\r"))
 				ft_print_error("Erro\nThere is a blank line in the map.\n");
-			else if (nbr < 4)
-				ft_check_texture_is_valid(data, data->line, nbr);
-			else if (nbr < 6)
-				ft_check_colors_is_valid(data, data->line, nbr);
+			if (nbr < 6)
+				ft_parse_config_line(data);
 			else
 				bol = ft_map_join(data);
 			nbr++;
