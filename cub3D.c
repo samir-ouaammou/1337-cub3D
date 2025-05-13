@@ -1,5 +1,51 @@
 #include "cub3D.h"
 
+void    *ft_music(void *arg)
+{
+    SDL_Init(SDL_INIT_AUDIO);
+    SDL_AudioSpec wav_spec;
+    Uint32 wav_length;
+    Uint8 *wav_buffer;
+
+    SDL_LoadWAV((char *)arg, &wav_spec, &wav_buffer, &wav_length);
+
+    SDL_OpenAudio(&wav_spec, NULL);
+
+    SDL_PauseAudio(0);
+    SDL_QueueAudio(1, wav_buffer, wav_length);
+
+    SDL_Delay(15000);
+
+    SDL_CloseAudio();
+    SDL_FreeWAV(wav_buffer);
+    SDL_Quit();
+    return (NULL);
+}
+
+void    ft_put_img(t_map_config *map)
+{
+    short   i;
+    int     tmp;
+    char    *str;
+    pthread_t   thread[2];
+
+    pthread_create(&thread[0], NULL, ft_music, "music1.wav");
+    i = -1;
+    while (++i < 40)
+    {
+        str = ft_strjoin("/home/souaammo/Desktop/42-cub3D/textures/Samir/img", ft_itoa(i));
+        map->img = mlx_xpm_file_to_image(map->mlx, str, &tmp, &tmp);
+        if (map->img)
+        {
+            mlx_put_image_to_window(map->mlx, map->win, map->img, 0, 0);
+            usleep(400000);
+        }
+        if (map->img)
+        mlx_destroy_image(map->mlx, map->img);
+    }
+    pthread_create(&thread[1], NULL, ft_music, "music0.wav");
+}
+
 int main(int ac, char **av)
 {
     t_map_config    *map;
@@ -21,15 +67,11 @@ int main(int ac, char **av)
     map = ft_parsing_map_file(map, av[1]);
 
     // ------------------------------------------------------------------------------------
-    //printf("player:  [%d\t%d]\n", map->player_x, map->player_y);
-    //printf("size:    [%d\t%d]\n", map->map_height, map->map_width);
-    //printf("color f: [%d\t%d\t%d]\n", map->floor_color[0], map->floor_color[1], map->floor_color[2]);
-    //printf("color c: [%d\t%d\t%d]\n", map->ceiling_color[0], map->ceiling_color[1], map->ceiling_color[2]);
 
-    //printf("map :\n");
-    //short i = 0;
-    //while (map->map[i])
-    //    printf("%s\n", map->map[i++]);
+    map->win = mlx_new_window(map->mlx, 1280, 600, "cub3D");
+    ft_put_img(map);
+    mlx_loop(map->mlx);
+
     // ------------------------------------------------------------------------------------
 
     ft_exit(0);

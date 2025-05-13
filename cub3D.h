@@ -5,11 +5,13 @@
 # include "./GarbageCollector/malloc.h"
 # include "./libft/libft.h"
 # include <X11/keysym.h>
-# include <fcntl.h>
-# include <stdio.h>
+# include <SDL2/SDL.h>
+# include <pthread.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
 # include <X11/X.h>
 # include <mlx.h>
 
@@ -17,7 +19,9 @@
 
 typedef struct s_map_config
 {
-    char            *mlx;
+    void            *mlx;
+    void            *win;
+    void            *img;
     char		    *no_texture;
     char		    *so_texture;
     char		    *we_texture;
