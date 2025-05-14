@@ -14,8 +14,69 @@
 # include <stdio.h>
 # include <X11/X.h>
 # include <mlx.h>
+# include "./libft/libft.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <string.h>
+#include <stdbool.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <stdlib.h>
+# include <unistd.h>
+#include <math.h>
 
+# define WIDTH 1280
+# define HEIGHT 6 * BLOCK
+# define BLOCK 100
+# define SPEED_CAMERA 0.02
+# define SPEED_PLAYER 3
+# define FOV (M_PI * (70.0 / 180.0))
 # define BUFFER_SIZE 1
+# define ESC_KEY 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+#define SPACE 32
+#define KEY_LEFT 123
+#define KEY_RIGHT 124
+# define LEFT 65361
+# define RIGHT 65363
+#define DE 0
+# define BUFFER_SIZE 1
+
+typedef struct s_map_config t_map_config;
+
+typedef struct s_parsing
+{
+	int			    fd;
+	char		    *line;
+	char		    *tmp;
+	char		    *str;
+	char		    **split;
+	char		    **map;
+    double      x;
+    double      y;
+	bool key_up;
+    bool key_down;
+    bool key_left;
+    bool key_right;
+    bool left_rotate;
+    bool right_rotate;
+    t_map_config    *data;
+}			t_parsing;
+
+
+typedef struct s_textures
+{
+	void *wall_img;
+	void *door_img;
+	void *img;
+	int wall_width;
+	int wall_height;
+	int door_width;
+	int door_height;
+} t_textures;
 
 typedef struct s_map_config
 {
@@ -29,22 +90,39 @@ typedef struct s_map_config
     int     	    floor_color[3];
     int     	    ceiling_color[3];
     char    	    **map;
-    short     	    map_width;
-    short     	    map_height;
-    short       	player_x;
-    short       	player_y;
+    // short     	    map_width;
+    // short     	    map_height;
+    // short       	player_x;
+    // short       	player_y;
+
+	char *data_pixel;
+    int bpp;
+    int size_line;
+    int endian;
+	void	*img_w1;
+	float ray_salib;
+	float ray_mojab;
+	float dx;
+	float dy;
+	float angle;
+    int				img_width;
+	int				img_height;
+    int open_door;
+    int close_door;
+    int x_door;
+    int y_door;
+    int close_kay;
+	double	player_angle;
+    // cs_sound_params_t theme_params;
+    // cs_sound_params_t *sound_track;
+    t_parsing player;
+    size_t     	map_width;
+    size_t     	map_height;
+    double       	player_x;
+    double       	player_y;
+    t_textures      textures;
 }   t_map_config;
 
-typedef struct s_parsing
-{
-	int			    fd;
-	char		    *line;
-	char		    *tmp;
-	char		    *str;
-	char		    **split;
-	char		    **map;
-    t_map_config    *data;
-}			t_parsing;
 
 void	            ft_print_map(void);
 char	            *get_next_line(int fd);
@@ -67,4 +145,11 @@ void                ft_check_path_to_the_west_texture_is_valid(t_parsing *data);
 void                ft_check_path_to_the_east_texture_is_valid(t_parsing *data);
 void	            ft_check_elements(char **map, size_t i, size_t j, size_t len);
 
+
+void init(t_map_config *g);
+int draw_map(t_map_config *g);
+int draw_loop(t_map_config *game);
+int key_press(int keycode, t_map_config *g);
+int key_release(int keycode, t_map_config *g);
+int raycasting(t_map_config *map);
 #endif

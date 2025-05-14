@@ -65,15 +65,7 @@ int main(int ac, char **av)
     if (!map->mlx)
         ft_print_error("Error\nmlx_init\n");
     map = ft_parsing_map_file(map, av[1]);
-
-    // ------------------------------------------------------------------------------------
-
-    map->win = mlx_new_window(map->mlx, 1280, 600, "cub3D");
-    ft_put_img(map);
-    mlx_loop(map->mlx);
-
-    // ------------------------------------------------------------------------------------
-
+    raycasting(map);
     ft_exit(0);
     return (0);
 }
