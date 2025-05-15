@@ -20,8 +20,8 @@ void	ft_player_location_and_map_size(t_parsing *data, char **str)
 				data->data->player_y = j;
 			}
 		}
-		if (data->data->map_width < j)
-			data->data->map_width = j;
+		// if (data->data->map_width < j)
+			// data->data->map_width = j;
 	}
 	data->data->map_height = i;
 }

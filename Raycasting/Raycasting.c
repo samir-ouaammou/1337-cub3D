@@ -4,8 +4,6 @@ void init_player(t_map_config *g);
 
 void init(t_map_config *g)
 {
-	g->mlx = mlx_init();
-	g->win = mlx_new_window(g->mlx, WIDTH, HEIGHT, "cub3D");
 	mlx_mouse_hide(g->mlx, g->win);
 	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
 	g->data_pixel = mlx_get_data_addr(g->img, &g->bpp, &g->size_line, &g->endian);

@@ -1,4 +1,4 @@
-#ifndef CUB3D_H
+# ifndef CUB3D_H
 # define CUB3D_H
 
 # include "./get_next_line/get_next_line.h"
@@ -7,23 +7,15 @@
 # include <X11/keysym.h>
 # include <SDL2/SDL.h>
 # include <pthread.h>
+# include <stdbool.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <X11/X.h>
+# include <math.h>
 # include <mlx.h>
-# include "./libft/libft.h"
-# include <fcntl.h>
-# include <stdio.h>
-# include <string.h>
-#include <stdbool.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include <stdlib.h>
-# include <unistd.h>
-#include <math.h>
 
 # define WIDTH 1280
 # define HEIGHT 6 * BLOCK
@@ -37,12 +29,12 @@
 # define A 97
 # define S 115
 # define D 100
-#define SPACE 32
-#define KEY_LEFT 123
-#define KEY_RIGHT 124
+# define SPACE 32
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
 # define LEFT 65361
 # define RIGHT 65363
-#define DE 0
+# define DE 0
 # define BUFFER_SIZE 1
 
 typedef struct s_map_config t_map_config;
@@ -55,27 +47,28 @@ typedef struct s_parsing
 	char		    *str;
 	char		    **split;
 	char		    **map;
-    double      x;
-    double      y;
-	bool key_up;
-    bool key_down;
-    bool key_left;
-    bool key_right;
-    bool left_rotate;
-    bool right_rotate;
+
+    double          x;
+    double          y;
+	bool            key_up;
+    bool            key_down;
+    bool            key_left;
+    bool            key_right;
+    bool            left_rotate;
+    bool            right_rotate;
     t_map_config    *data;
 }			t_parsing;
 
 
 typedef struct s_textures
 {
-	void *wall_img;
-	void *door_img;
-	void *img;
-	int wall_width;
-	int wall_height;
-	int door_width;
-	int door_height;
+	void            *wall_img;
+	void            *door_img;
+	void            *img;
+	int             wall_width;
+	int             wall_height;
+	int             door_width;
+	int             door_height;
 } t_textures;
 
 typedef struct s_map_config
@@ -90,45 +83,42 @@ typedef struct s_map_config
     int     	    floor_color[3];
     int     	    ceiling_color[3];
     char    	    **map;
-    // short     	    map_width;
-    // short     	    map_height;
-    // short       	player_x;
-    // short       	player_y;
 
-	char *data_pixel;
-    int bpp;
-    int size_line;
-    int endian;
-	void	*img_w1;
-	float ray_salib;
-	float ray_mojab;
-	float dx;
-	float dy;
-	float angle;
-    int				img_width;
+	char            *data_pixel;
+    int             bpp;
+    int             size_line;
+    int             endian;
+	void	        *img_w1;
+	float           ray_salib;
+	float           ray_mojab;
+	float           dx;
+	float           dy;
+	float           angle;
+    // int				img_width;
 	int				img_height;
-    int open_door;
-    int close_door;
-    int x_door;
-    int y_door;
-    int close_kay;
-	double	player_angle;
+    int             open_door;
+    int             close_door;
+    int             x_door;
+    int             y_door;
+    int             close_kay;
+	double	        player_angle;
     // cs_sound_params_t theme_params;
     // cs_sound_params_t *sound_track;
-    t_parsing player;
-    size_t     	map_width;
-    size_t     	map_height;
+    t_parsing       player;
+    // size_t     	m   ap_width;
+    size_t     	    map_height;
     double       	player_x;
     double       	player_y;
     t_textures      textures;
 }   t_map_config;
 
-
 void	            ft_print_map(void);
+void                *ft_music(void *arg);
 char	            *get_next_line(int fd);
 void		        ft_print_error(char *str);
 short	            ft_count_len(char **strs);
 int                 ft_map_join(t_parsing *data);
+void                ft_put_img(t_map_config *map);
 void	            ft_init_parsing(t_parsing *data);
 void                ft_parse_config_line(t_parsing *data);
 void                ft_init_map_config(t_map_config *data);
@@ -146,10 +136,10 @@ void                ft_check_path_to_the_east_texture_is_valid(t_parsing *data);
 void	            ft_check_elements(char **map, size_t i, size_t j, size_t len);
 
 
-void init(t_map_config *g);
-int draw_map(t_map_config *g);
-int draw_loop(t_map_config *game);
-int key_press(int keycode, t_map_config *g);
-int key_release(int keycode, t_map_config *g);
-int raycasting(t_map_config *map);
+void                init(t_map_config *g);
+int                 draw_map(t_map_config *g);
+int                 draw_loop(t_map_config *game);
+int                 raycasting(t_map_config *map);
+int                 key_press(int keycode, t_map_config *g);
+int                 key_release(int keycode, t_map_config *g);
 #endif
