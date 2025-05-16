@@ -55,4 +55,5 @@ void	ft_check_elements(char **map, size_t i, size_t j, size_t len)
 		}
 	}
 	ft_check_map(map, -1, -1, 0);
+	ft_check_dor_errors(map, -1, -1);
 }

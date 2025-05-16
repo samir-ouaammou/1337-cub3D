@@ -10,7 +10,7 @@ void	ft_check_dor_errors(char **map, size_t i, size_t j)
 			if ((map[i][j] == 'D')
 				&& (map[i][j - 1] != '1' || map[i][j + 1] != '1'
 				|| ft_strlen(map[i - 1]) < j || ft_strlen(map[i + 1]) < j
-				|| map[i - 1][j] == ' ' || map[i + 1][j] == ' '))
+				|| map[i - 1][j] != '0' || map[i + 1][j] != '0'))
 			{
 				write (2, "Error\nInvalid door 'D' placement — 'D' ", 41);
 				write (2, "must be enclosed by walls ('1') on its ", 39);

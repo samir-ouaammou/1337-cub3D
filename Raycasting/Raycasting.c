@@ -105,6 +105,8 @@ int key_press(int keycode, t_map_config *g)
 {
 	if (keycode == ESC_KEY)
 		exit(0);
+	if (keycode == SPACE)
+		ft_put_img_to_img(g, 400 , 100, 3);
 	if (keycode == SPACE && g->open_door == 1 && g->close_kay == 0)
 	{
 		if (g->map[(int)((g->player.y + 80) / BLOCK)][(int)(g->player.x / BLOCK)] == 'D')

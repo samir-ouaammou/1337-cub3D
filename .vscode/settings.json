@@ -4,6 +4,8 @@
         "malloc.h": "c",
         "cub3d.h": "c",
         "fcntl.h": "c",
-        "keysym.h": "c"
+        "keysym.h": "c",
+        "map": "c",
+        "format": "c"
     }
 }
