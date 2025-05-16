@@ -3,11 +3,8 @@ SRC = cc  cub3D.c music.c put_img.c Raycasting/*.c parsing/*.c libft/*.c Garbage
 all:
 	$(SRC)
 
-clean:
-	rm -f parsing/*.o libft/*.o Raycasting/*.o GarbageCollector/*.o libft/get_next_line/*.o
-
 fclean: clean
-	rm -f ./a.out
+	rm ./a.out
 
 re: fclean all
 
