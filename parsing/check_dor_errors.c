@@ -12,10 +12,10 @@ void	ft_check_dor_errors(char **map, size_t i, size_t j)
 				|| ft_strlen(map[i - 1]) < j || ft_strlen(map[i + 1]) < j
 				|| map[i - 1][j] != '0' || map[i + 1][j] != '0'))
 			{
-				write (2, "Error\nInvalid door 'D' placement — 'D' ", 41);
-				write (2, "must be enclosed by walls ('1') on its ", 39);
-				write (2, "left and right, and there must be no ", 37);
-				ft_print_error("empty space or void above or below it.\n");
+				write (2, "Error\nInvalid door 'D' placement — it must ", 45);
+				write (2, "be enclosed by walls ('1') on its left ", 39);
+				write (2, "and right, and must be placed between valid ", 44);
+				ft_print_error ("floor tiles ('0') above and below.\n");
 			}
 		}
 	}
