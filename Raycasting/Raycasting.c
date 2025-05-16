@@ -406,7 +406,7 @@ int draw_loop(t_map_config *game)
 					   game->map[player_map_y - 1][player_map_x] == 'D');
 	game->close_door = (game->map[player_map_y + 1][player_map_x] == 'O' ||
 						game->map[player_map_y - 1][player_map_x] == 'O');
-	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	ft_put_img_to_img(game, 400 , 100, 1);
 	// mlx_put_image_to_window(game->mlx, game->win, game->textures.wall_img, 300, 500);
 	return 0;
 }

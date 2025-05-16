@@ -84,6 +84,11 @@ typedef struct s_map_config
     int     	    ceiling_color[3];
     char    	    **map;
 
+    void            *p_img;
+    int             p_img_height;
+    int             p_img_width;
+    unsigned int    color;
+
 	char            *data_pixel;
     int             bpp;
     int             size_line;
@@ -134,6 +139,7 @@ void                ft_check_path_to_the_south_texture_is_valid(t_parsing *data)
 void                ft_check_path_to_the_west_texture_is_valid(t_parsing *data);
 void                ft_check_path_to_the_east_texture_is_valid(t_parsing *data);
 void	            ft_check_elements(char **map, size_t i, size_t j, size_t len);
+void    ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int n);
 
 
 void                init(t_map_config *g);
@@ -142,4 +148,7 @@ int                 draw_loop(t_map_config *game);
 int                 raycasting(t_map_config *map);
 int                 key_press(int keycode, t_map_config *g);
 int                 key_release(int keycode, t_map_config *g);
+
+int get_pixel_color(void *img, int x, int y);
+void put_pixel(int x, int y, int color, t_map_config *g);
 #endif

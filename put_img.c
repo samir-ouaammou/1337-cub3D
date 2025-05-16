@@ -23,3 +23,29 @@ void    ft_put_img(t_map_config *map)
     }
     pthread_create(&thread[1], NULL, ft_music, "music0.wav");
 }
+
+
+void    ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int n)
+{
+    void    *player_img;
+	int     player_width;
+	int     player_height;
+	int     x = -1, y = -1;
+	int     color;
+
+    player_img = mlx_xpm_file_to_image(game->mlx, "textures/player/img1", &player_width, &player_height);
+    if (!player_img)
+        return ;
+
+	while (++y < player_height)
+	{
+        x = -1;
+		while (++x < player_width)
+		{
+			color = get_pixel_color(player_img, x, y);
+			if (color != 0xff000000)
+                put_pixel(x + x_offset, y + y_offset, color, game);
+		}
+	}
+    mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+}
