@@ -106,7 +106,7 @@ int key_press(int keycode, t_map_config *g)
 	if (keycode == ESC_KEY)
 		exit(0);
 	if (keycode == SPACE)
-		ft_put_img_to_img(g, 400 , 100, 3);
+		ft_put_img_to_img(g, 400 , 195, 3);
 	if (keycode == SPACE && g->open_door == 1 && g->close_kay == 0)
 	{
 		if (g->map[(int)((g->player.y + 80) / BLOCK)][(int)(g->player.x / BLOCK)] == 'D')
@@ -408,7 +408,7 @@ int draw_loop(t_map_config *game)
 					   game->map[player_map_y - 1][player_map_x] == 'D');
 	game->close_door = (game->map[player_map_y + 1][player_map_x] == 'O' ||
 						game->map[player_map_y - 1][player_map_x] == 'O');
-	ft_put_img_to_img(game, 400 , 100, 1);
+	ft_put_img_to_img(game, 400 , 200, 1);
 	// mlx_put_image_to_window(game->mlx, game->win, game->textures.wall_img, 300, 500);
 	return 0;
 }

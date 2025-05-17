@@ -35,7 +35,12 @@ void    ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int n)
 
     void *img2 = ft_strdup((char *)game->img);
 
-    int i = 0;
+    int i;
+
+    if (n == 1)
+        i = n++;
+    else
+        i = 2;
     while (++i <= n)
     {
         player_img = mlx_xpm_file_to_image(game->mlx, ft_strjoin("textures/player/img", ft_itoa(i)), &player_width, &player_height);
