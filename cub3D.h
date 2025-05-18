@@ -20,8 +20,9 @@
 # define WIDTH 1280
 # define HEIGHT 6 * BLOCK
 # define BLOCK 100
-# define SPEED_CAMERA 0.02
-# define SPEED_PLAYER 3
+# define TL 8
+# define SPEED_CAMERA 0.05
+# define SPEED_PLAYER 0.7
 # define FOV (M_PI * (70.0 / 180.0))
 # define BUFFER_SIZE 1
 # define ESC_KEY 65307
@@ -34,7 +35,7 @@
 # define KEY_RIGHT 124
 # define LEFT 65361
 # define RIGHT 65363
-# define DE 0
+# define DE 1
 # define BUFFER_SIZE 1
 
 typedef struct s_map_config t_map_config;
