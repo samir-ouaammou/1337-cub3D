@@ -18,8 +18,9 @@
 # include <mlx.h>
 
 # define WIDTH 1280
-# define HEIGHT 600
-# define BLOCK 8
+# define HEIGHT 6 * BLOCK
+# define BLOCK 100
+# define TL 8
 # define SPEED_CAMERA 0.05
 # define SPEED_PLAYER 0.7
 # define FOV (M_PI * (70.0 / 180.0))

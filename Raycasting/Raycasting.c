@@ -45,9 +45,9 @@ int get_pixel_color(void *img, int x, int y)
 
 void draw_tile(t_map_config *g, int x, int y, int color)
 {
-	for (int i = 0; i < BLOCK; i++)
+	for (int i = 0; i < TL; i++)
 	{
-		for (int j = 0; j < BLOCK; j++)
+		for (int j = 0; j < TL; j++)
 		{
 			put_pixel(x + j, y + i, color, g);
 		}
@@ -63,8 +63,8 @@ void init_player(t_map_config *g)
 			if (g->map[i][j] == 'W' || g->map[i][j] == 'N' ||
 				g->map[i][j] == 'S' || g->map[i][j] == 'E')
 			{
-				g->player.x = j * BLOCK + BLOCK / 2;
-				g->player.y = i * BLOCK + BLOCK / 2;
+				g->player.x = j * TL + TL / 2;
+				g->player.y = i * TL + TL / 2;
 				if (g->map[i][j] == 'N')
 					g->angle = -M_PI / 2;
 				else if (g->map[i][j] == 'S')
@@ -109,11 +109,11 @@ int draw_map(t_map_config *g)
 		for (int j = 0; g->map[i][j]; j++)
 		{
 			if (g->map[i][j] == '1')
-				draw_tile(g, j * BLOCK, i * BLOCK, 0x0000FF);
+				draw_tile(g, j * TL, i * TL, 0x0000FF);
 			else if (g->map[i][j] == 'D')
-				draw_tile(g, j * BLOCK, i * BLOCK, 0x00FF00);
+				draw_tile(g, j * TL, i * TL, 0x00FF00);
 			else
-				draw_tile(g, j * BLOCK, i * BLOCK, 0x000000);
+				draw_tile(g, j * TL, i * TL, 0x000000);
 		}
 	}
 	// draw_test(g);
@@ -123,30 +123,17 @@ int draw_map(t_map_config *g)
 
 int key_press(int keycode, t_map_config *g)
 {
-	int player_map_x = (int)(g->player.x / BLOCK);
-	int player_map_y = (int)(g->player.y / BLOCK);
+	int player_map_x = (int)(g->player.x / TL);
+	int player_map_y = (int)(g->player.y / TL);
 	double dx = g->player.x + cos(g->angle) * 10;
 	double dy = g->player.y + sin(g->angle) * 10;
-	double dx_t = g->player.x + cos(g->angle) * 5;
-	double dy_t = g->player.y + sin(g->angle) * 5;
 
 	if (keycode == ESC_KEY)
 		exit(0);
-	if ((keycode == 'E' || keycode == 'e') && g->close_kay == 0
-		&& (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'D' || g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'D'))
-	{
-		if (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'D')
-			g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] = 'O';
-		else if (g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'D')
-			g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] = 'O';
-	}
-	else if ((keycode == 'E' || keycode == 'e') && (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'O' || g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'O') && g->close_kay == 0)
-	{
-		if (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'O')
-			g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] = 'D';
-		else if (g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'O')
-			g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] = 'D';
-	}
+	if ((keycode == 'E' || keycode == 'e') && g->close_kay == 0 && g->map[(int)(dy / TL)][(int)(dx / TL)] == 'D')
+		g->map[(int)(dy / TL)][(int)(dx / TL)] = 'O';
+	else if ((keycode == 'E' || keycode == 'e') && g->map[(int)(dy / TL)][(int)(dx / TL)] == 'O' && g->close_kay == 0)
+		g->map[(int)(dy / TL)][(int)(dx / TL)] = 'D';
 	else if (keycode == A)
 	{
 		g->close_kay = 1;
@@ -236,31 +223,31 @@ int mo_player(t_map_config *g)
 		new_x -= sin_angle * SPEED_PLAYER;
 		new_y += cos_angle * SPEED_PLAYER;
 	}
-	if (g->map[(int)((g->player.y - 1) / BLOCK)][(int)(new_x / BLOCK)] != '1'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)(new_x / BLOCK)] != '1'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)((new_x - 1) / BLOCK)] != '1'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)((new_x + 1) / BLOCK)] != '1'
-		&& g->map[(int)((g->player.y - 1) / BLOCK)][(int)(g->player.x / BLOCK)] != '1'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)(g->player.x / BLOCK)] != '1'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)((g->player.x - 1) / BLOCK)] != '1'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)((g->player.x + 1) / BLOCK)] != '1'
-		&& g->map[(int)((g->player.y - 1) / BLOCK)][(int)(new_x / BLOCK)] != 'D'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)(new_x / BLOCK)] != 'D'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)((new_x - 1) / BLOCK)] != 'D'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)((new_x + 1) / BLOCK)] != 'D'
-		&& g->map[(int)((g->player.y - 1) / BLOCK)][(int)(g->player.x / BLOCK)] != 'D'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)(g->player.x / BLOCK)] != 'D'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)((g->player.x - 1) / BLOCK)] != 'D'
-		&& g->map[(int)((g->player.y + 1) / BLOCK)][(int)((g->player.x + 1) / BLOCK)] != 'D')
+	if (g->map[(int)((g->player.y - 1) / TL)][(int)(new_x / TL)] != '1'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)(new_x / TL)] != '1'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)((new_x - 1) / TL)] != '1'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)((new_x + 1) / TL)] != '1'
+		&& g->map[(int)((g->player.y - 1) / TL)][(int)(g->player.x / TL)] != '1'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)(g->player.x / TL)] != '1'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)((g->player.x - 1) / TL)] != '1'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)((g->player.x + 1) / TL)] != '1'
+		&& g->map[(int)((g->player.y - 1) / TL)][(int)(new_x / TL)] != 'D'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)(new_x / TL)] != 'D'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)((new_x - 1) / TL)] != 'D'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)((new_x + 1) / TL)] != 'D'
+		&& g->map[(int)((g->player.y - 1) / TL)][(int)(g->player.x / TL)] != 'D'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)(g->player.x / TL)] != 'D'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)((g->player.x - 1) / TL)] != 'D'
+		&& g->map[(int)((g->player.y + 1) / TL)][(int)((g->player.x + 1) / TL)] != 'D')
 		g->player.x = new_x;
-	if (g->map[(int)((new_y - 1) / BLOCK)][(int)(g->player.x / BLOCK)] != '1'
-		&& g->map[(int)((new_y + 1) / BLOCK)][(int)(g->player.x / BLOCK)] != '1'
-		&& g->map[(int)((new_y + 1) / BLOCK)][(int)((g->player.x - 1) / BLOCK)] != '1'
-		&& g->map[(int)((new_y + 1) / BLOCK)][(int)((g->player.x + 1) / BLOCK)] != '1'
-		&& g->map[(int)((new_y - 1) / BLOCK)][(int)(g->player.x / BLOCK)] != 'D'
-		&& g->map[(int)((new_y + 1) / BLOCK)][(int)(g->player.x / BLOCK)] != 'D'
-		&& g->map[(int)((new_y + 1) / BLOCK)][(int)((g->player.x - 1) / BLOCK)] != 'D'
-		&& g->map[(int)((new_y + 1) / BLOCK)][(int)((g->player.x + 1) / BLOCK)] != 'D')
+	if (g->map[(int)((new_y - 1) / TL)][(int)(g->player.x / TL)] != '1'
+		&& g->map[(int)((new_y + 1) / TL)][(int)(g->player.x / TL)] != '1'
+		&& g->map[(int)((new_y + 1) / TL)][(int)((g->player.x - 1) / TL)] != '1'
+		&& g->map[(int)((new_y + 1) / TL)][(int)((g->player.x + 1) / TL)] != '1'
+		&& g->map[(int)((new_y - 1) / TL)][(int)(g->player.x / TL)] != 'D'
+		&& g->map[(int)((new_y + 1) / TL)][(int)(g->player.x / TL)] != 'D'
+		&& g->map[(int)((new_y + 1) / TL)][(int)((g->player.x - 1) / TL)] != 'D'
+		&& g->map[(int)((new_y + 1) / TL)][(int)((g->player.x + 1) / TL)] != 'D')
 		g->player.y = new_y;
 	draw_map(g);
 	return (0);
@@ -288,8 +275,8 @@ int draw_loop(t_map_config *game)
 		game->dy = sin(angle);
 		double player_x = game->player.x;
 		double player_y = game->player.y;
-		int map_x = (int)(player_x / BLOCK);
-		int map_y = (int)(player_y / BLOCK);
+		int map_x = (int)(player_x / TL);
+		int map_y = (int)(player_y / TL);
 		int step_x = 0;
 		int step_y = 0;
 		double dis_x = 0.0;
@@ -297,22 +284,22 @@ int draw_loop(t_map_config *game)
 		if (game->dx < 0)
 		{
 			step_x = -1;
-			dis_x = fabs(((player_x - (map_x * BLOCK)) / BLOCK) * (BLOCK / game->dx));
+			dis_x = fabs(((player_x - (map_x * TL)) / TL) * (TL / game->dx));
 		}
 		else
 		{
 			step_x = 1;
-			dis_x = fabs(((player_x - ((map_x + 1) * BLOCK)) / BLOCK) * (BLOCK / game->dx));
+			dis_x = fabs(((player_x - ((map_x + 1) * TL)) / TL) * (TL / game->dx));
 		}
 		if (game->dy < 0)
 		{
 			step_y = -1;
-			dis_y = fabs(((player_y - (map_y * BLOCK)) / BLOCK) * (BLOCK / game->dy));
+			dis_y = fabs(((player_y - (map_y * TL)) / TL) * (TL / game->dy));
 		}
 		else
 		{
 			step_y = 1;
-			dis_y = fabs(((player_y - ((map_y + 1) * BLOCK)) / BLOCK) * (BLOCK / game->dy));
+			dis_y = fabs(((player_y - ((map_y + 1) * TL)) / TL) * (TL / game->dy));
 		}
 		int side = 0;
 		int hit_wall = 0;
@@ -322,13 +309,13 @@ int draw_loop(t_map_config *game)
 		{
 			if (dis_x < dis_y)
 			{
-				dis_x += fabs(BLOCK / game->dx);
+				dis_x += fabs(TL / game->dx);
 				map_x += step_x;
 				side = 0;
 			}
 			else
 			{
-				dis_y += fabs(BLOCK / game->dy);
+				dis_y += fabs(TL / game->dy);
 				map_y += step_y;
 				side = 1;
 			}
@@ -357,27 +344,28 @@ int draw_loop(t_map_config *game)
 		}
 		if (side == 0)
 		{
-			double player_block_x = player_x / BLOCK;
+			double player_BLOCK_x = player_x / TL;
 			if (step_x < 0)
-				distance = (map_x + 1 - player_block_x) * BLOCK;
+				distance = (map_x + 1 - player_BLOCK_x) * TL;
 			else
-				distance = (map_x - player_block_x) * BLOCK;
+				distance = (map_x - player_BLOCK_x) * TL;
 			distance = fabs(distance / game->dx);
 		}
 		else
 		{
-			double player_block_y = player_y / BLOCK;
+			double player_BLOCK_y = player_y / TL;
 			if (step_y < 0)
-				distance = (map_y + 1 - player_block_y) * BLOCK;
+				distance = (map_y + 1 - player_BLOCK_y) * TL;
 			else
-				distance = (map_y - player_block_y) * BLOCK;
+				distance = (map_y - player_BLOCK_y) * TL;
 			distance = fabs(distance / game->dy);
 		}
 		distance = distance * cos(angle - game->angle);
-		double wall_height = (BLOCK * HEIGHT) / distance;
+		double wall_height = (TL * HEIGHT) / distance;
 		double start_y = (HEIGHT / 2) - (wall_height / 2);
 		double end_y = (HEIGHT / 2) + (wall_height / 2);
 		int color = 0;
+		// ...existing code...
 		for (int y = (int)start_y; y < (int)end_y; y++)
 		{
 			if (hit_wall)
@@ -387,8 +375,8 @@ int draw_loop(t_map_config *game)
 				if (side == 0)
 				{
 					double wall_hit = game->player.y + distance * game->dy;
-					wall_hit = fmod(wall_hit, BLOCK);
-					texture_x = (int)(wall_hit * game->textures.wall_width / BLOCK);
+					wall_hit = fmod(wall_hit, TL);
+					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
 					if (game->dx > 0)
 						wall_img = game->no_texture;
 					else
@@ -397,8 +385,8 @@ int draw_loop(t_map_config *game)
 				else
 				{
 					double wall_hit = game->player.x + distance * game->dx;
-					wall_hit = fmod(wall_hit, BLOCK);
-					texture_x = (int)(wall_hit * game->textures.wall_width / BLOCK);
+					wall_hit = fmod(wall_hit, TL);
+					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
 					if (game->dy > 0)
 						wall_img = game->we_texture;
 					else
@@ -411,6 +399,7 @@ int draw_loop(t_map_config *game)
 				color = 0x0000FF;
 			put_pixel(screen_x, y, color, game);
 		}
+		// ...existing code...
 		screen_x++;
 		angle += (1.2 / (double)(WIDTH));
 	}

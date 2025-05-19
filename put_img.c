@@ -7,7 +7,8 @@ void    ft_put_img(t_map_config *map)
     char    *str;
     pthread_t   thread[2];
 
-    pthread_create(&thread[0], NULL, ft_music, "music1.wav");
+    pthread_create(&thread[0], NULL, ft_music, "music/music1.wav");
+    pthread_detach(thread[0]);
     i = -1;
     while (++i < 4)
     {
@@ -21,7 +22,8 @@ void    ft_put_img(t_map_config *map)
         if (map->img)
         mlx_destroy_image(map->mlx, map->img);
     }
-    pthread_create(&thread[1], NULL, ft_music, "music0.wav");
+    pthread_create(&thread[1], NULL, ft_music, "music/music0.wav");
+    pthread_detach(thread[1]);
 }
 
 
