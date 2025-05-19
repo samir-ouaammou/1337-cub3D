@@ -130,10 +130,21 @@ int key_press(int keycode, t_map_config *g)
 
 	if (keycode == ESC_KEY)
 		exit(0);
-	if ((keycode == 'E' || keycode == 'e') && g->close_kay == 0 && g->map[(int)(dy / TL)][(int)(dx / TL)] == 'D')
-		g->map[(int)(dy / TL)][(int)(dx / TL)] = 'O';
-	else if ((keycode == 'E' || keycode == 'e') && g->map[(int)(dy / TL)][(int)(dx / TL)] == 'O' && g->close_kay == 0)
-		g->map[(int)(dy / TL)][(int)(dx / TL)] = 'D';
+	if ((keycode == 'E' || keycode == 'e') && g->close_kay == 0
+		&& (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'D' || g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'D'))
+	{
+		if (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'D')
+			g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] = 'O';
+		else if (g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'D')
+			g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] = 'O';
+	}
+	else if ((keycode == 'E' || keycode == 'e') && (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'O' || g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'O') && g->close_kay == 0)
+	{
+		if (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'O')
+			g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] = 'D';
+		else if (g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'O')
+			g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] = 'D';
+	}
 	else if (keycode == A)
 	{
 		g->close_kay = 1;
