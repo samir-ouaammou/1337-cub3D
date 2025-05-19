@@ -376,7 +376,6 @@ int draw_loop(t_map_config *game)
 		double start_y = (HEIGHT / 2) - (wall_height / 2);
 		double end_y = (HEIGHT / 2) + (wall_height / 2);
 		int color = 0;
-		// ...existing code...
 		for (int y = (int)start_y; y < (int)end_y; y++)
 		{
 			if (hit_wall)
@@ -389,9 +388,9 @@ int draw_loop(t_map_config *game)
 					wall_hit = fmod(wall_hit, TL);
 					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
 					if (game->dx > 0)
-						wall_img = game->no_texture; // غرب
+						wall_img = game->no_texture;
 					else
-						wall_img = game->so_texture; // شرق
+						wall_img = game->so_texture;
 				}
 				else
 				{
@@ -399,9 +398,9 @@ int draw_loop(t_map_config *game)
 					wall_hit = fmod(wall_hit, TL);
 					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
 					if (game->dy > 0)
-						wall_img = game->we_texture; // شمال
+						wall_img = game->we_texture;
 					else
-						wall_img = game->ea_texture; // جنوب
+						wall_img = game->ea_texture;
 				}
 				int texture_y = ((y - start_y) * game->textures.wall_height) / (int)wall_height;
 				color = get_pixel_color(wall_img, texture_x, texture_y);
@@ -410,7 +409,6 @@ int draw_loop(t_map_config *game)
 				color = 0x0000FF;
 			put_pixel(screen_x, y, color, game);
 		}
-		// ...existing code...
 		screen_x++;
 		angle += (1.2 / (double)(WIDTH));
 	}
