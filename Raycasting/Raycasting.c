@@ -334,7 +334,7 @@ int draw_loop(t_map_config *game)
 		double end_y1 = 0;
 		for (double y = start_y1; y > end_y1; y--)
 		{
-			put_pixel(screen_x, y, 0x000000, game);
+			put_pixel(screen_x, y, 0x87CEEB, game);
 		}
 		double start_y2 = HEIGHT / 2;
 		double end_y2 = WIDTH;
@@ -365,30 +365,41 @@ int draw_loop(t_map_config *game)
 		double start_y = (HEIGHT / 2) - (wall_height / 2);
 		double end_y = (HEIGHT / 2) + (wall_height / 2);
 		int color = 0;
+		// ...existing code...
 		for (int y = (int)start_y; y < (int)end_y; y++)
 		{
 			if (hit_wall)
 			{
+				int texture_x;
+				void *wall_img;
 				if (side == 0)
 				{
+					double wall_hit = game->player.y + distance * game->dy;
+					wall_hit = fmod(wall_hit, TL);
+					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
 					if (game->dx > 0)
-						color = get_pixel_color(game->textures.wall_img, 0, 0);
+						wall_img = game->no_texture; // غرب
 					else
-						color = 0xFFFF00;
+						wall_img = game->so_texture; // شرق
 				}
 				else
 				{
+					double wall_hit = game->player.x + distance * game->dx;
+					wall_hit = fmod(wall_hit, TL);
+					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
 					if (game->dy > 0)
-						color = 0x00FFFF;
+						wall_img = game->we_texture; // شمال
 					else
-						color = 0xFF00FF;
+						wall_img = game->ea_texture; // جنوب
 				}
+				int texture_y = ((y - start_y) * game->textures.wall_height) / (int)wall_height;
+				color = get_pixel_color(wall_img, texture_x, texture_y);
 			}
 			else if (hit_door)
 				color = 0x0000FF;
-			// color = apply_distance_shading(color, distance);
 			put_pixel(screen_x, y, color, game);
 		}
+		// ...existing code...
 		screen_x++;
 		angle += (1.2 / (double)(WIDTH));
 	}
