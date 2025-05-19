@@ -3,10 +3,10 @@
 void	ft_init_map_config(t_map_config *data)
 {
 	data->mlx = NULL;
-	data->no_texture = NULL;
-	data->so_texture = NULL;
-	data->we_texture = NULL;
-	data->ea_texture = NULL;
+	data->no_img = NULL;
+	data->so_img = NULL;
+	data->we_img = NULL;
+	data->ea_img = NULL;
 	data->map = NULL;
 	data->floor_color[0] = -1;
 	data->floor_color[1] = -1;

@@ -77,10 +77,10 @@ typedef struct s_map_config
     void            *mlx;
     void            *win;
     void            *img;
-    char		    *no_texture;
-    char		    *so_texture;
-    char		    *we_texture;
-    char		    *ea_texture;
+    char		    *no_img;
+    char		    *so_img;
+    char		    *we_img;
+    char		    *ea_img;
     int     	    floor_color[3];
     int     	    ceiling_color[3];
     char    	    **map;

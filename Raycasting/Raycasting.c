@@ -378,9 +378,9 @@ int draw_loop(t_map_config *game)
 					wall_hit = fmod(wall_hit, TL);
 					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
 					if (game->dx > 0)
-						wall_img = game->no_texture;
+						wall_img = game->no_img;
 					else
-						wall_img = game->so_texture;
+						wall_img = game->so_img;
 				}
 				else
 				{
@@ -388,9 +388,9 @@ int draw_loop(t_map_config *game)
 					wall_hit = fmod(wall_hit, TL);
 					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
 					if (game->dy > 0)
-						wall_img = game->we_texture;
+						wall_img = game->we_img;
 					else
-						wall_img = game->ea_texture;
+						wall_img = game->ea_img;
 				}
 				int texture_y = ((y - start_y) * game->textures.wall_height) / (int)wall_height;
 				color = get_pixel_color(wall_img, texture_x, texture_y);
