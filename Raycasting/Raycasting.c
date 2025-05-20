@@ -366,33 +366,39 @@ int draw_loop(t_map_config *game)
 		double end_y = (HEIGHT / 2) + (wall_height / 2);
 		int color = 0;
 		// ...existing code...
-		for (int y = (int)start_y; y < (int)end_y; y++)
+				for (int y = (int)start_y; y < (int)end_y; y++)
 		{
 			if (hit_wall)
 			{
 				int texture_x;
 				void *wall_img;
+				double wall_hit;
+		
 				if (side == 0)
 				{
-					double wall_hit = game->player.y + distance * game->dy;
+					// ضرب فـ الجدار العمودي: استعمل y
+					wall_hit = game->player.y + (distance / cos(angle - game->angle)) * game->dy;
 					wall_hit = fmod(wall_hit, TL);
 					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
-					if (game->dx > 0)
-						wall_img = game->no_img;
-					else
-						wall_img = game->so_img;
+					if (texture_x < 0) texture_x = 0;
+					if (texture_x >= game->textures.wall_width) texture_x = game->textures.wall_width - 1;
+					wall_img = (game->dx > 0) ? game->no_img : game->so_img;
 				}
 				else
 				{
-					double wall_hit = game->player.x + distance * game->dx;
+					// ضرب فـ الجدار الأفقي: استعمل x
+					wall_hit = game->player.x + (distance / cos(angle - game->angle)) * game->dx;
 					wall_hit = fmod(wall_hit, TL);
 					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
-					if (game->dy > 0)
-						wall_img = game->we_img;
-					else
-						wall_img = game->ea_img;
+					if (texture_x < 0) texture_x = 0;
+					if (texture_x >= game->textures.wall_width) texture_x = game->textures.wall_width - 1;
+					wall_img = (game->dy > 0) ? game->we_img : game->ea_img;
 				}
+		
 				int texture_y = ((y - start_y) * game->textures.wall_height) / (int)wall_height;
+				if (texture_y < 0) texture_y = 0;
+				if (texture_y >= game->textures.wall_height) texture_y = game->textures.wall_height - 1;
+		
 				color = get_pixel_color(wall_img, texture_x, texture_y);
 			}
 			else if (hit_door)
