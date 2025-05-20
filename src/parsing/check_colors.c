@@ -1,4 +1,4 @@
-#include "../cub3D.h"
+#include "../../includes/cub3D.h"
 
 short	ft_count_commas(char *str)
 {

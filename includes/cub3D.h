@@ -1,9 +1,9 @@
 # ifndef CUB3D_H
 # define CUB3D_H
 
-# include "./get_next_line/get_next_line.h"
-# include "./GarbageCollector/malloc.h"
-# include "./libft/libft.h"
+# include "../help/get_next_line/get_next_line.h"
+# include "../help/GarbageCollector/malloc.h"
+# include "../help/libft/libft.h"
 # include <X11/keysym.h>
 # include <SDL2/SDL.h>
 # include <pthread.h>

@@ -1,4 +1,4 @@
-# include "cub3D.h"
+# include "../includes/cub3D.h"
 
 void    ft_put_img(t_map_config *map)
 {
@@ -17,7 +17,9 @@ void    ft_put_img(t_map_config *map)
         if (map->img)
         {
             mlx_put_image_to_window(map->mlx, map->win, map->img, 0, 0);
-            usleep(5000000);
+            usleep(1000000);
+            if (i == 3)
+                usleep(3000000);
         }
         if (map->img)
         mlx_destroy_image(map->mlx, map->img);

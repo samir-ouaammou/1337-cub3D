@@ -1,4 +1,4 @@
-#include "../cub3D.h"
+#include "../../includes/cub3D.h"
 
 void	ft_read_map_file(t_parsing *data, short nbr, short bol)
 {

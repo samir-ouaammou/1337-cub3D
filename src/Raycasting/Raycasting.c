@@ -1,4 +1,4 @@
-#include "../cub3D.h"
+#include "../../includes/cub3D.h"
 
 void init_player(t_map_config *g);
 
@@ -340,7 +340,7 @@ int draw_loop(t_map_config *game)
 		double end_y2 = WIDTH;
 		for (double y = start_y2; y < end_y2; y++)
 		{
-			put_pixel(screen_x, y, 0x00CC00, game);
+			put_pixel(screen_x, y, 0x0A1E2A, game);
 		}
 		if (side == 0)
 		{

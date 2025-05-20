@@ -1,4 +1,4 @@
-#include "cub3D.h"
+#include "../includes/cub3D.h"
 
 void    *ft_music(void *arg)
 {
@@ -14,7 +14,7 @@ void    *ft_music(void *arg)
     SDL_PauseAudio(0);
     SDL_QueueAudio(1, wav_buffer, wav_length);
 
-    SDL_Delay(15000);
+    SDL_Delay(3000);
 
     SDL_CloseAudio();
     SDL_FreeWAV(wav_buffer);

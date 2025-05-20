@@ -1,4 +1,4 @@
-#include "../cub3D.h"
+#include "../../includes/cub3D.h"
 
 void	ft_check_path_to_the_north_texture_is_valid(t_parsing *data)
 {

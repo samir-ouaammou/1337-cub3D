@@ -1,4 +1,4 @@
-#include "../cub3D.h"
+#include "../../includes/cub3D.h"
 
 void	ft_init_map_config(t_map_config *data)
 {

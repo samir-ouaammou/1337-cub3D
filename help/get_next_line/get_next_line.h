@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include "../cub3D.h"
+#include "../../includes/cub3D.h"
 
 size_t	ft_strlen(const char *str);
 int		ft_check_new_line(const char *str, char c);

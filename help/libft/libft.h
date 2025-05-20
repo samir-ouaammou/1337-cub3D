@@ -16,7 +16,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include "../cub3D.h"
+#include "../../includes/cub3D.h"
 
 typedef struct s_list
 {
