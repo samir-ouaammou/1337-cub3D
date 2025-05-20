@@ -9,4 +9,4 @@ fclean: clean
 re: fclean all
 
 
-#-g3 -fsanitize=address
+# -g -g3 -fsanitize=address

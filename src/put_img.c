@@ -10,7 +10,7 @@ void    ft_put_img(t_map_config *map)
     map->index.i = -1;
     while (++map->index.i < 4)
     {
-        map->strs.str = ft_strjoin("/home/souaammo/Desktop/42-cub3D/textures/Samir/image0", ft_itoa(map->index.i));
+        map->strs.str = ft_strjoin("./textures/image.img/image0", ft_itoa(map->index.i));
         map->img = mlx_xpm_file_to_image(map->mlx, map->strs.str, &tmp, &tmp);
         if (map->img)
         {
@@ -35,7 +35,7 @@ void    ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int n)
         game->index.i = 2;
     while (++game->index.i <= n)
     {
-        game->image.img = mlx_xpm_file_to_image(game->mlx, ft_strjoin("textures/player/img", ft_itoa(game->index.i)), &game->image.width, &game->image.heigth);
+        game->image.img = mlx_xpm_file_to_image(game->mlx, ft_strjoin("textures/image.xpm/P_img", ft_itoa(game->index.i)), &game->image.width, &game->image.heigth);
         if (!game->image.img)
             return ;
         game->index.y = -1;

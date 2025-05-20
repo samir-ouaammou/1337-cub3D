@@ -365,7 +365,6 @@ int draw_loop(t_map_config *game)
 		double start_y = (HEIGHT / 2) - (wall_height / 2);
 		double end_y = (HEIGHT / 2) + (wall_height / 2);
 		int color = 0;
-		// ...existing code...
 		for (int y = (int)start_y; y < (int)end_y; y++)
 		{
 			if (hit_wall)
@@ -392,7 +391,6 @@ int draw_loop(t_map_config *game)
 					if (texture_x >= game->textures.wall_width) texture_x = game->textures.wall_width - 1;
 					wall_img = (game->dy > 0) ? game->we_img : game->ea_img;
 				}
-		
 				int texture_y = ((y - start_y) * game->textures.wall_height) / (int)wall_height;
 				if (texture_y < 0) texture_y = 0;
 				if (texture_y >= game->textures.wall_height) texture_y = game->textures.wall_height - 1;
@@ -403,7 +401,6 @@ int draw_loop(t_map_config *game)
 				color = 0x0000FF;
 			put_pixel(screen_x, y, color, game);
 		}
-		// ...existing code...
 		screen_x++;
 		angle += (1.2 / (double)(WIDTH));
 	}
