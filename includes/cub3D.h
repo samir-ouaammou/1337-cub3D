@@ -40,6 +40,35 @@
 
 typedef struct s_map_config t_map_config;
 
+typedef struct s_index
+{
+    int             i;
+    int             j;
+    int             x;
+    int             y;
+    int             h;
+    int             k;
+}   t_index;
+
+typedef struct s_strs
+{
+    char            *str;
+    char            *tmp;
+    char            *line;
+    char            **map;
+    char            **strs;
+    char            **split;
+}   t_strs;
+
+typedef struct s_image
+{
+    void            *img;
+    void            *addr;
+    int             width;
+    int             heigth;
+    int             color;
+}   t_image;
+
 typedef struct s_parsing
 {
 	int			    fd;
@@ -85,6 +114,10 @@ typedef struct s_map_config
     int     	    ceiling_color[3];
     char    	    **map;
 
+    t_image         image;
+    t_index         index;
+    t_strs          strs;
+
     void            *p_img;
     int             p_img_height;
     int             p_img_width;
@@ -118,6 +151,7 @@ typedef struct s_map_config
     t_textures      textures;
 }   t_map_config;
 
+
 void	            ft_print_map(void);
 void                *ft_music(void *arg);
 char	            *get_next_line(int fd);
@@ -140,7 +174,7 @@ void                ft_check_path_to_the_south_texture_is_valid(t_parsing *data)
 void                ft_check_path_to_the_west_texture_is_valid(t_parsing *data);
 void                ft_check_path_to_the_east_texture_is_valid(t_parsing *data);
 void	            ft_check_elements(char **map, size_t i, size_t j, size_t len);
-void    ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int n);
+void                ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int n);
 
 
 void                init(t_map_config *g);
@@ -150,6 +184,6 @@ int                 raycasting(t_map_config *map);
 int                 key_press(int keycode, t_map_config *g);
 int                 key_release(int keycode, t_map_config *g);
 
-int get_pixel_color(void *img, int x, int y);
-void put_pixel(int x, int y, int color, t_map_config *g);
+int                 get_pixel_color(void *img, int x, int y);
+void                put_pixel(int x, int y, int color, t_map_config *g);
 #endif
