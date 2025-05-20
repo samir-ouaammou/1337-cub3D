@@ -14,7 +14,7 @@ void	ft_init_map_config(t_map_config *data)
 	data->ceiling_color[0] = -1;
 	data->ceiling_color[1] = -1;
 	data->ceiling_color[2] = -1;
-	// data->map_width = 0;
+	data->map_width = 0;
 	data->map_height = 0;
 	data->player_x = -1;
 	data->player_y = -1;

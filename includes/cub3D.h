@@ -65,7 +65,7 @@ typedef struct s_image
     void            *addr;
     int             width;
     int             heigth;
-    int             color;
+    unsigned int    color;
 }   t_image;
 
 typedef struct s_parsing
@@ -112,6 +112,8 @@ typedef struct s_map_config
     int     	    floor_color[3];
     int     	    ceiling_color[3];
     char    	    **map;
+    int             map_width;
+    int             map_height;
 
     t_image         image;
     t_index         index;
@@ -144,7 +146,6 @@ typedef struct s_map_config
     // cs_sound_params_t *sound_track;
     t_parsing       player;
     // size_t     	m   ap_width;
-    size_t     	    map_height;
     double       	player_x;
     double       	player_y;
     t_textures      textures;

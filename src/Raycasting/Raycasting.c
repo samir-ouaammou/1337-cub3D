@@ -123,8 +123,8 @@ int draw_map(t_map_config *g)
 
 int key_press(int keycode, t_map_config *g)
 {
-	int player_map_x = (int)(g->player.x / BLOCK);
-	int player_map_y = (int)(g->player.y / BLOCK);
+	// int player_map_x = (int)(g->player.x / BLOCK);
+	// int player_map_y = (int)(g->player.y / BLOCK);
 	double dx = g->player.x + cos(g->angle) * 10;
 	double dy = g->player.y + sin(g->angle) * 10;
 	double dx_t = g->player.x + cos(g->angle) * 5;
