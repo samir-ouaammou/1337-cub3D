@@ -366,7 +366,7 @@ int draw_loop(t_map_config *game)
 		double end_y = (HEIGHT / 2) + (wall_height / 2);
 		int color = 0;
 		// ...existing code...
-				for (int y = (int)start_y; y < (int)end_y; y++)
+		for (int y = (int)start_y; y < (int)end_y; y++)
 		{
 			if (hit_wall)
 			{
@@ -376,7 +376,6 @@ int draw_loop(t_map_config *game)
 		
 				if (side == 0)
 				{
-					// ضرب فـ الجدار العمودي: استعمل y
 					wall_hit = game->player.y + (distance / cos(angle - game->angle)) * game->dy;
 					wall_hit = fmod(wall_hit, TL);
 					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
@@ -386,7 +385,6 @@ int draw_loop(t_map_config *game)
 				}
 				else
 				{
-					// ضرب فـ الجدار الأفقي: استعمل x
 					wall_hit = game->player.x + (distance / cos(angle - game->angle)) * game->dx;
 					wall_hit = fmod(wall_hit, TL);
 					texture_x = (int)(wall_hit * game->textures.wall_width / TL);
