@@ -340,7 +340,7 @@ int draw_loop(t_map_config *game)
 		double end_y2 = WIDTH;
 		for (double y = start_y2; y < end_y2; y++)
 		{
-			put_pixel(screen_x, y, 0x000000, game);
+			put_pixel(screen_x, y, 0x00CC00, game);
 		}
 		if (side == 0)
 		{
