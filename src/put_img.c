@@ -1,47 +1,57 @@
-# include "../includes/cub3D.h"
+#include "../includes/cub3D.h"
 
-void    ft_put_img(t_map_config *map)
+void	ft_put_img(t_map_config *map)
 {
-    int         tmp;
-    pthread_t   thread;
+	int			tmp;
+	pthread_t	thread;
 
-    pthread_create(&thread, NULL, ft_music, "music/music1.wav");
-    pthread_detach(thread);
-    map->img = mlx_xpm_file_to_image(map->mlx, "./textures/image.img/image00", &tmp, &tmp);
-    if (map->img)
-    {
-        mlx_put_image_to_window(map->mlx, map->win, map->img, 0, 0);
-        usleep(2000000);
-    }
-    if (map->img)
-    mlx_destroy_image(map->mlx, map->img);
+	pthread_create(&thread, NULL, ft_music, "music/music1.wav");
+	pthread_detach(thread);
+	map->img = mlx_xpm_file_to_image(map->mlx,
+			"./textures/image.img/image00", &tmp, &tmp);
+	if (map->img)
+	{
+		mlx_put_image_to_window(map->mlx, map->win, map->img, 0, 0);
+		usleep(2000000);
+	}
+	if (map->img)
+		mlx_destroy_image(map->mlx, map->img);
 }
 
-
-void    ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int n)
+int	ft_get_start(t_map_config *game, int *end)
 {
-    if (n == 1)
-        game->index.i = n++;
-    else
-        game->index.i = 2;
-    while (++game->index.i <= n)
-    {
-        game->image.img = mlx_xpm_file_to_image(game->mlx,
-            ft_strjoin("textures/image.xpm/P_img", ft_itoa(game->index.i)), &game->image.width, &game->image.heigth);
-        if (!game->image.img)
-            return ;
-        game->index.y = -1;
-        while (++game->index.y < game->image.heigth)
-        {
-            game->index.x = -1;
-            while (++game->index.x < game->image.width)
-            {
-                game->image.color = get_pixel_color(game->image.img, game->index.x, game->index.y);
-                if (game->image.color != 0xff000000)
-                    put_pixel(game->index.x + x_offset, game->index.y + y_offset, game->image.color, game);
-            }
-        }
-        mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-        usleep(10000);
-    }
+	if (*end == 1)
+		game->index.i = (*end)++;
+	else
+		game->index.i = 2;
+	return (game->index.i);
+}
+
+void	ft_put_img_to_img(t_map_config *game, int x_offset,
+	int y_offset, int end)
+{
+	game->index.i = ft_get_start(game, &end);
+	while (++game->index.i <= end)
+	{
+		game->image.img = mlx_xpm_file_to_image(game->mlx, ft_strjoin
+				("textures/image.xpm/P_img", ft_itoa(game->index.i)),
+				&game->image.width, &game->image.heigth);
+		if (!game->image.img)
+			return ;
+		game->index.y = -1;
+		while (++game->index.y < game->image.heigth)
+		{
+			game->index.x = -1;
+			while (++game->index.x < game->image.width)
+			{
+				game->image.color = get_pixel_color(game->image.img,
+						game->index.x, game->index.y);
+				if (game->image.color != 0xff000000)
+					put_pixel(game->index.x + x_offset, game->index.y
+						+ y_offset, game->image.color, game);
+			}
+		}
+		mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+		usleep(10000);
+	}
 }

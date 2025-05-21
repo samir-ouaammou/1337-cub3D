@@ -174,7 +174,7 @@ void                ft_check_path_to_the_south_texture_is_valid(t_parsing *data)
 void                ft_check_path_to_the_west_texture_is_valid(t_parsing *data);
 void                ft_check_path_to_the_east_texture_is_valid(t_parsing *data);
 void	            ft_check_elements(char **map, size_t i, size_t j, size_t len);
-void                ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int n);
+void                ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int end);
 
 
 void                init(t_map_config *g);
