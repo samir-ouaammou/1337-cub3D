@@ -282,26 +282,25 @@ void draw_door_texture(int screen_x, int y, double start_y, double wall_height, 
     double wall_hit;
     void *door_img = game->textures.door_img;
 
-    // نفس الحسابات بحال wall
     if (side == 0)
-    {
         wall_hit = game->player.y + (distance / cos(angle - start_angle)) * game->dy;
-    }
     else
-    {
         wall_hit = game->player.x + (distance / cos(angle - start_angle)) * game->dx;
-    }
     wall_hit = fmod(wall_hit, BLOCK);
     if (wall_hit < 0)
         wall_hit += BLOCK;
 
     texture_x = (int)(wall_hit * game->textures.door_width / BLOCK);
-    if (texture_x < 0) texture_x = 0;
-    if (texture_x >= game->textures.door_width) texture_x = game->textures.door_width - 1;
+    if (texture_x < 0)
+		texture_x = 0;
+    if (texture_x >= game->textures.door_width)
+		texture_x = game->textures.door_width - 1;
 
     texture_y = ((y - start_y) * game->textures.door_height) / (int)wall_height;
-    if (texture_y < 0) texture_y = 0;
-    if (texture_y >= game->textures.door_height) texture_y = game->textures.door_height - 1;
+    if (texture_y < 0)
+		texture_y = 0;
+    if (texture_y >= game->textures.door_height)
+		texture_y = game->textures.door_height - 1;
 
     int color = get_pixel_color(door_img, texture_x, texture_y);
     put_pixel(screen_x, y, color, game);
@@ -425,7 +424,10 @@ int draw_loop(t_map_config *game)
 					texture_x = (int)(wall_hit * game->textures.wall_width / BLOCK);
 					if (texture_x < 0) texture_x = 0;
 					if (texture_x >= game->textures.wall_width) texture_x = game->textures.wall_width - 1;
-					wall_img = (game->dx > 0) ? game->no_img : game->so_img;
+					if (game->dx > 0)
+						wall_img = game->no_img;
+					else
+						wall_img = game->so_img;
 				}
 				else
 				{
@@ -434,7 +436,10 @@ int draw_loop(t_map_config *game)
 					texture_x = (int)(wall_hit * game->textures.wall_width / BLOCK);
 					if (texture_x < 0) texture_x = 0;
 					if (texture_x >= game->textures.wall_width) texture_x = game->textures.wall_width - 1;
-					wall_img = (game->dy > 0) ? game->we_img : game->ea_img;
+					if (game->dy > 0)
+						wall_img = game->we_img;
+					else
+						wall_img = game->ea_img;
 				}
 				int texture_y = ((y - start_y) * game->textures.wall_height) / (int)wall_height;
 				if (texture_y < 0) texture_y = 0;
