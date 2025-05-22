@@ -9,7 +9,7 @@ void init(t_map_config *g)
 	g->data_pixel = mlx_get_data_addr(g->img, &g->bpp, &g->size_line, &g->endian);
 	g->textures.wall_img = mlx_xpm_file_to_image(g->mlx, "./wall.xpm", &g->textures.wall_width, &g->textures.wall_height);
 	g->textures.img = mlx_xpm_file_to_image(g->mlx, "./gg.xpm", &g->textures.wall_width, &g->textures.wall_height);
-	g->textures.door_img = mlx_xpm_file_to_image(g->mlx, "./door.xpm", &g->textures.door_width, &g->textures.door_height);
+	g->textures.door_img = mlx_xpm_file_to_image(g->mlx, "./textures/image.xpm/D_img", &g->textures.door_width, &g->textures.door_height);
 	init_player(g);
 }
 
@@ -275,6 +275,38 @@ void clear_image(t_map_config *game)
 
 int apply_distance_shading(int color, double distance);
 
+
+void draw_door_texture(int screen_x, int y, double start_y, double wall_height, t_map_config *game, int side, double distance, double angle, double start_angle)
+{
+    int texture_x, texture_y;
+    double wall_hit;
+    void *door_img = game->textures.door_img;
+
+    // نفس الحسابات بحال wall
+    if (side == 0)
+    {
+        wall_hit = game->player.y + (distance / cos(angle - start_angle)) * game->dy;
+    }
+    else
+    {
+        wall_hit = game->player.x + (distance / cos(angle - start_angle)) * game->dx;
+    }
+    wall_hit = fmod(wall_hit, BLOCK);
+    if (wall_hit < 0)
+        wall_hit += BLOCK;
+
+    texture_x = (int)(wall_hit * game->textures.door_width / BLOCK);
+    if (texture_x < 0) texture_x = 0;
+    if (texture_x >= game->textures.door_width) texture_x = game->textures.door_width - 1;
+
+    texture_y = ((y - start_y) * game->textures.door_height) / (int)wall_height;
+    if (texture_y < 0) texture_y = 0;
+    if (texture_y >= game->textures.door_height) texture_y = game->textures.door_height - 1;
+
+    int color = get_pixel_color(door_img, texture_x, texture_y);
+    put_pixel(screen_x, y, color, game);
+}
+
 int draw_loop(t_map_config *game)
 {
 	clear_image(game);
@@ -411,7 +443,10 @@ int draw_loop(t_map_config *game)
 				color = get_pixel_color(wall_img, texture_x, texture_y);
 			}
 			else if (hit_door)
-				color = 0x0000FF;
+			{
+				draw_door_texture(screen_x, y, start_y, wall_height, game, side, distance, angle, game->angle);
+				continue;
+			}
 			put_pixel(screen_x, y, color, game);
 		}
 		screen_x++;
