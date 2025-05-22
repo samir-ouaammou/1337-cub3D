@@ -276,6 +276,32 @@ void clear_image(t_map_config *game)
 int apply_distance_shading(int color, double distance);
 
 
+// Function for side == 0
+void get_wall_side0(t_map_config *game, double distance, double angle, int *texture_x, void **wall_img)
+{
+    double wall_hit = game->player.y + (distance / cos(angle - game->angle)) * game->dy;
+    wall_hit = fmod(wall_hit, BLOCK);
+    *texture_x = (int)(wall_hit * game->textures.wall_width / BLOCK);
+    if (*texture_x < 0)
+		*texture_x = 0;
+    if (*texture_x >= game->textures.wall_width)
+		*texture_x = game->textures.wall_width - 1;
+    *wall_img = (game->dx > 0) ? game->no_img : game->so_img;
+}
+
+// Function for side == 1
+void get_wall_side1(t_map_config *game, double distance, double angle, int *texture_x, void **wall_img)
+{
+    double wall_hit = game->player.x + (distance / cos(angle - game->angle)) * game->dx;
+    wall_hit = fmod(wall_hit, BLOCK);
+    *texture_x = (int)(wall_hit * game->textures.wall_width / BLOCK);
+    if (*texture_x < 0)
+		*texture_x = 0;
+    if (*texture_x >= game->textures.wall_width)
+		*texture_x = game->textures.wall_width - 1;
+    *wall_img = (game->dy > 0) ? game->we_img : game->ea_img;
+}
+
 void draw_door_texture(int screen_x, int y, double start_y, double wall_height, t_map_config *game, int side, double distance, double angle, double start_angle)
 {
     int texture_x, texture_y;
@@ -304,6 +330,33 @@ void draw_door_texture(int screen_x, int y, double start_y, double wall_height, 
 
     int color = get_pixel_color(door_img, texture_x, texture_y);
     put_pixel(screen_x, y, color, game);
+}
+
+void ft_draw_textures( int screen_x, double start_y, double end_y, int hit_wall, int hit_door, int side, double distance, double angle, double wall_height, t_map_config *game)
+{
+    int color = 0;
+    for (int y = (int)start_y; y < (int)end_y; y++)
+    {
+        if (hit_wall)
+        {
+            int texture_x;
+            void *wall_img;
+            if (side == 0)
+                get_wall_side0(game, distance, angle, &texture_x, &wall_img);
+            else
+                get_wall_side1(game, distance, angle, &texture_x, &wall_img);
+            int texture_y = ((y - start_y) * game->textures.wall_height) / (int)wall_height;
+            if (texture_y < 0) texture_y = 0;
+            if (texture_y >= game->textures.wall_height) texture_y = game->textures.wall_height - 1;
+            color = get_pixel_color(wall_img, texture_x, texture_y);
+        }
+        else if (hit_door)
+        {
+            draw_door_texture(screen_x, y, start_y, wall_height, game, side, distance, angle, game->angle);
+            continue;
+        }
+        put_pixel(screen_x, y, color, game);
+    }
 }
 
 int draw_loop(t_map_config *game)
@@ -408,52 +461,7 @@ int draw_loop(t_map_config *game)
 		double wall_height = (BLOCK * HEIGHT) / distance;
 		double start_y = (HEIGHT / 2) - (wall_height / 2);
 		double end_y = (HEIGHT / 2) + (wall_height / 2);
-		int color = 0;
-		for (int y = (int)start_y; y < (int)end_y; y++)
-		{
-			if (hit_wall)
-			{
-				int texture_x;
-				void *wall_img;
-				double wall_hit;
-		
-				if (side == 0)
-				{
-					wall_hit = game->player.y + (distance / cos(angle - game->angle)) * game->dy;
-					wall_hit = fmod(wall_hit, BLOCK);
-					texture_x = (int)(wall_hit * game->textures.wall_width / BLOCK);
-					if (texture_x < 0) texture_x = 0;
-					if (texture_x >= game->textures.wall_width) texture_x = game->textures.wall_width - 1;
-					if (game->dx > 0)
-						wall_img = game->no_img;
-					else
-						wall_img = game->so_img;
-				}
-				else
-				{
-					wall_hit = game->player.x + (distance / cos(angle - game->angle)) * game->dx;
-					wall_hit = fmod(wall_hit, BLOCK);
-					texture_x = (int)(wall_hit * game->textures.wall_width / BLOCK);
-					if (texture_x < 0) texture_x = 0;
-					if (texture_x >= game->textures.wall_width) texture_x = game->textures.wall_width - 1;
-					if (game->dy > 0)
-						wall_img = game->we_img;
-					else
-						wall_img = game->ea_img;
-				}
-				int texture_y = ((y - start_y) * game->textures.wall_height) / (int)wall_height;
-				if (texture_y < 0) texture_y = 0;
-				if (texture_y >= game->textures.wall_height) texture_y = game->textures.wall_height - 1;
-		
-				color = get_pixel_color(wall_img, texture_x, texture_y);
-			}
-			else if (hit_door)
-			{
-				draw_door_texture(screen_x, y, start_y, wall_height, game, side, distance, angle, game->angle);
-				continue;
-			}
-			put_pixel(screen_x, y, color, game);
-		}
+		ft_draw_textures(screen_x, start_y, end_y, hit_wall, hit_door, side, distance, angle, wall_height, game); // Samir
 		screen_x++;
 		angle += (1.2 / (double)(WIDTH));
 	}
