@@ -17,25 +17,26 @@
 # include <math.h>
 # include <mlx.h>
 
-# define WIDTH 1280
-# define HEIGHT 600
-# define BLOCK 8
-# define SPEED_CAMERA 0.05
-# define SPEED_PLAYER 0.7
-# define FOV (M_PI * (70.0 / 180.0))
-# define BUFFER_SIZE 1
-# define ESC_KEY 65307
-# define W 119
-# define A 97
-# define S 115
-# define D 100
-# define SPACE 32
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
-# define LEFT 65361
-# define RIGHT 65363
-# define DE 1
-# define BUFFER_SIZE 1
+#define WIDTH 1280
+#define HEIGHT 600
+#define BLOCK 8
+#define SPEED_CAMERA 0.05
+#define SPEED_PLAYER 0.7
+#define DEG2RAD 0.017453292519943295
+#define FOV (68.0 * DEG2RAD)
+#define BUFFER_SIZE 1
+#define ESC_KEY 65307
+#define W 119
+#define A 97
+#define S 115
+#define D 100
+#define SPACE 32
+#define KEY_LEFT 123
+#define KEY_RIGHT 124
+#define LEFT 65361
+#define RIGHT 65363
+#define DE 1
+#define BUFFER_SIZE 1
 
 typedef struct s_map_config t_map_config;
 

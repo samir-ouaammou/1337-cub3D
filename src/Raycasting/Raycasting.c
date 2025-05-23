@@ -8,7 +8,6 @@ void init(t_map_config *g)
 	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
 	g->data_pixel = mlx_get_data_addr(g->img, &g->bpp, &g->size_line, &g->endian);
 	g->textures.wall_img = mlx_xpm_file_to_image(g->mlx, "./wall.xpm", &g->textures.wall_width, &g->textures.wall_height);
-	g->textures.img = mlx_xpm_file_to_image(g->mlx, "./gg.xpm", &g->textures.wall_width, &g->textures.wall_height);
 	g->textures.door_img = mlx_xpm_file_to_image(g->mlx, "./textures/image.xpm/D_img", &g->textures.door_width, &g->textures.door_height);
 	init_player(g);
 }
@@ -22,6 +21,16 @@ void put_pixel(int x, int y, int color, t_map_config *g)
 	g->data_pixel[index + 1] = (color >> 8) & 0xFF;
 	g->data_pixel[index + 2] = (color >> 16) & 0xFF;
 }
+
+// void put_pixel(int x, int y, int color, t_map_config *g)
+// {
+// 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+// 		return;
+// 	int index = y * g->size_line2 + x * (g->bpp2 / 8);
+// 	g->data_pixel2[index] = color & 0xFF;
+// 	g->data_pixel2[index + 1] = (color >> 8) & 0xFF;
+// 	g->data_pixel2[index + 2] = (color >> 16) & 0xFF;
+// }
 
 int get_pixel_color(void *img, int x, int y)
 {
@@ -81,6 +90,17 @@ void draw_player(t_map_config *g)
 	}
 }
 
+// void draw_test(t_map_config *g)
+// {
+// 	for (int i = 0; i < 5; i++)
+// 	{
+// 		for (int j = 0; j < 5; j++)
+// 		{
+// 			put_pixel(g->player.x + j -0.9, g->player.y + i -1, 0xFF00FF, g);
+// 		}
+// 	}
+// }
+
 int draw_map(t_map_config *g)
 {
 	for (int i = 0; g->map[i]; i++)
@@ -91,34 +111,68 @@ int draw_map(t_map_config *g)
 				draw_tile(g, j * BLOCK, i * BLOCK, 0x0000FF);
 			else if (g->map[i][j] == 'D')
 				draw_tile(g, j * BLOCK, i * BLOCK, 0x00FF00);
+			else if (g->map[i][j] == 'O')
+				draw_tile(g, j * BLOCK, i * BLOCK, 0xFF0000);
 			else
 				draw_tile(g, j * BLOCK, i * BLOCK, 0x000000);
 		}
 	}
+	// draw_test(g);
 	draw_player(g);
 	return (0);
 }
 
+void	ft_free_image(t_map_config *game)
+{
+	if (game->textures.img)
+		mlx_destroy_image(game->mlx, game->textures.img);
+	if (game->textures.door_img)
+		mlx_destroy_image(game->mlx, game->textures.door_img);
+	if (game->textures.wall_img)
+		mlx_destroy_image(game->mlx, game->textures.wall_img);
+	if ( game->textures.no_img)
+		mlx_destroy_image(game->mlx, game->textures.no_img);
+	if ( game->textures.so_img)
+		mlx_destroy_image(game->mlx, game->textures.so_img);
+	if ( game->textures.we_img)
+		mlx_destroy_image(game->mlx, game->textures.we_img);
+	if ( game->textures.ea_img)
+		mlx_destroy_image(game->mlx, game->textures.ea_img);
+	if ( game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if ( game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+}
+
+
 int key_press(int keycode, t_map_config *g)
 {
-	// int player_map_x = (int)(g->player.x / BLOCK);
-	// int player_map_y = (int)(g->player.y / BLOCK);
+	int player_map_x = (int)(g->player.x / BLOCK);
+	int player_map_y = (int)(g->player.y / BLOCK);
 	double dx = g->player.x + cos(g->angle) * 10;
 	double dy = g->player.y + sin(g->angle) * 10;
 	double dx_t = g->player.x + cos(g->angle) * 5;
 	double dy_t = g->player.y + sin(g->angle) * 5;
 
 	if (keycode == ESC_KEY)
-		exit(0);
+	{
+		ft_free_image(g);
+		ft_exit(0);
+	}
 	if ((keycode == 'E' || keycode == 'e')
-		&& (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'D' || g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'D'))
+		&& (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'D' || g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'D') && g->close_kay == 0
+		&& g->map[player_map_y][player_map_x] != 'D')
 	{
 		if (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'D')
 			g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] = 'O';
 		else if (g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'D')
 			g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] = 'O';
 	}
-	else if ((keycode == 'E' || keycode == 'e') && (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'O' || g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'O') && g->close_kay == 0)
+	else if ((keycode == 'E' || keycode == 'e')
+	&& (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'O' || g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == 'O') && g->close_kay == 0 &&  g->map[player_map_y][player_map_x] != 'O')
 	{
 		if (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == 'O')
 			g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] = 'D';
@@ -338,8 +392,8 @@ void ft_draw_textures(int screen_x, double start_y, double end_y, int hit_wall, 
 int draw_loop(t_map_config *game)
 {
 	clear_image(game);
-	game->ray_salib = game->angle - 0.6;
-	game->ray_mojab = game->angle + 0.6;
+	game->ray_salib = game->angle - FOV / 2;
+	game->ray_mojab = game->angle + FOV / 2;
 	double angle = game->ray_salib;
 	int screen_x = 0;
 	while (angle < game->ray_mojab)
@@ -439,7 +493,7 @@ int draw_loop(t_map_config *game)
 		double end_y = (HEIGHT / 2) + (wall_height / 2);
 		ft_draw_textures(screen_x, start_y, end_y, hit_wall, hit_door, side, distance, angle, wall_height, game); // Samir
 		screen_x++;
-		angle += (1.2 / (double)(WIDTH));
+		angle += 0.0009;
 	}
 	mo_player(game);
 	ft_put_img_to_img(game, 400 , 200, 1);

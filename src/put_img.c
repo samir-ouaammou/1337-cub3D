@@ -52,6 +52,7 @@ void	ft_put_img_to_img(t_map_config *game, int x_offset,
 			}
 		}
 		mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+		mlx_destroy_image(game->mlx, game->image.img);
 		usleep(10000);
 	}
 }
