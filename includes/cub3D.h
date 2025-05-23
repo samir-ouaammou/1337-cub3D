@@ -136,6 +136,7 @@ typedef struct s_draw_textures
 	int		color;
 	int 	texture_x;
 	int 	texture_y;
+    // double  distance;
 	
 }	t_draw_textures;
 
@@ -180,6 +181,7 @@ typedef struct s_map_config
     t_strs          strs;
     t_parsing       player;
     t_textures      textures;
+    t_draw_textures draw;
 }   t_map_config;
 
 
