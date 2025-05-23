@@ -23,16 +23,6 @@ void put_pixel(int x, int y, int color, t_map_config *g)
 	g->data_pixel[index + 2] = (color >> 16) & 0xFF;
 }
 
-// void put_pixel(int x, int y, int color, t_map_config *g)
-// {
-// 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-// 		return;
-// 	int index = y * g->size_line2 + x * (g->bpp2 / 8);
-// 	g->data_pixel2[index] = color & 0xFF;
-// 	g->data_pixel2[index + 1] = (color >> 8) & 0xFF;
-// 	g->data_pixel2[index + 2] = (color >> 16) & 0xFF;
-// }
-
 int get_pixel_color(void *img, int x, int y)
 {
 	char *data;
@@ -91,17 +81,6 @@ void draw_player(t_map_config *g)
 	}
 }
 
-// void draw_test(t_map_config *g)
-// {
-// 	for (int i = 0; i < 5; i++)
-// 	{
-// 		for (int j = 0; j < 5; j++)
-// 		{
-// 			put_pixel(g->player.x + j -0.9, g->player.y + i -1, 0xFF00FF, g);
-// 		}
-// 	}
-// }
-
 int draw_map(t_map_config *g)
 {
 	for (int i = 0; g->map[i]; i++)
@@ -116,7 +95,6 @@ int draw_map(t_map_config *g)
 				draw_tile(g, j * BLOCK, i * BLOCK, 0x000000);
 		}
 	}
-	// draw_test(g);
 	draw_player(g);
 	return (0);
 }
@@ -276,7 +254,6 @@ void clear_image(t_map_config *game)
 int apply_distance_shading(int color, double distance);
 
 
-// Function for side == 0
 void get_wall_side0(t_map_config *game, double distance, double angle, int *texture_x, void **wall_img)
 {
     double wall_hit = game->player.y + (distance / cos(angle - game->angle)) * game->dy;
@@ -289,7 +266,6 @@ void get_wall_side0(t_map_config *game, double distance, double angle, int *text
     *wall_img = (game->dx > 0) ? game->no_img : game->so_img;
 }
 
-// Function for side == 1
 void get_wall_side1(t_map_config *game, double distance, double angle, int *texture_x, void **wall_img)
 {
     double wall_hit = game->player.x + (distance / cos(angle - game->angle)) * game->dx;
@@ -332,7 +308,7 @@ void draw_door_texture(int screen_x, int y, double start_y, double wall_height, 
     put_pixel(screen_x, y, color, game);
 }
 
-void ft_draw_textures( int screen_x, double start_y, double end_y, int hit_wall, int hit_door, int side, double distance, double angle, double wall_height, t_map_config *game)
+void ft_draw_textures(int screen_x, double start_y, double end_y, int hit_wall, int hit_door, int side, double distance, double angle, double wall_height, t_map_config *game)
 {
     int color = 0;
     for (int y = (int)start_y; y < (int)end_y; y++)

@@ -100,6 +100,26 @@ typedef struct s_textures
 	int             door_height;
 } t_textures;
 
+typedef struct s_draw_textures
+{
+	t_index		S_index;
+	t_textures	S_textures;
+
+	int 	side;
+	int 	screen_x;
+	double 	start_y;
+	int 	hit_wall;
+	int 	hit_door;
+	double 	end_y;
+	double 	distance;
+	double 	start_angle;
+	double 	wall_height;
+	int		color;
+	int 	texture_x;
+	int 	texture_y;
+	
+}	t_draw_textures;
+
 typedef struct s_map_config
 {
     void            *mlx;
