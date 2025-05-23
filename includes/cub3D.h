@@ -105,19 +105,17 @@ typedef struct s_map_config
     void            *mlx;
     void            *win;
     void            *img;
+    char    	    **map;
     char		    *no_img;
     char		    *so_img;
     char		    *we_img;
     char		    *ea_img;
     int     	    floor_color[3];
     int     	    ceiling_color[3];
-    char    	    **map;
     int             map_width;
     int             map_height;
-
-    t_image         image;
-    t_index         index;
-    t_strs          strs;
+    double       	player_x;
+    double       	player_y;
 
     void            *p_img;
     int             p_img_height;
@@ -134,7 +132,6 @@ typedef struct s_map_config
 	float           dx;
 	float           dy;
 	float           angle;
-    // int				img_width;
 	int				img_height;
     int             open_door;
     int             close_door;
@@ -142,12 +139,11 @@ typedef struct s_map_config
     int             y_door;
     int             close_kay;
 	double	        player_angle;
-    // cs_sound_params_t theme_params;
-    // cs_sound_params_t *sound_track;
+
+    t_image         image;
+    t_index         index;
+    t_strs          strs;
     t_parsing       player;
-    // size_t     	m   ap_width;
-    double       	player_x;
-    double       	player_y;
     t_textures      textures;
 }   t_map_config;
 
