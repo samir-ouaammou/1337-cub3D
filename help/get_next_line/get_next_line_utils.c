@@ -56,13 +56,12 @@ char	*ft_str_join(char *s1, char *s2)
 		return (ft_strdup(s2));
 	if (!s2)
 		return (ft_strdup(s1));
-	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	result = ft_malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!result)
 		return (NULL);
 	result[0] = '\0';
 	ft_strcat(result, s1);
 	ft_strcat(result, s2);
-	free(s1);
 	s1 = NULL;
 	return (result);
 }

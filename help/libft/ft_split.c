@@ -33,17 +33,6 @@ static int	ft_word_count(const char *str, char c)
 	return (count);
 }
 
-static void	*ft_free(char **str, int count)
-{
-	while (count > 0)
-	{
-		free(str[count - 1]);
-		count--;
-	}
-	free(str);
-	return (NULL);
-}
-
 static char	**ft_split2(char **res, const char *s, char c)
 {
 	size_t	i;
@@ -63,7 +52,7 @@ static char	**ft_split2(char **res, const char *s, char c)
 				i++;
 			res[h] = ft_substr(s, j, i - j);
 			if (!res[h])
-				return (ft_free(res, h));
+				return (NULL);
 			h++;
 		}
 	}
@@ -77,7 +66,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	res = (char **)ft_calloc(sizeof(char *), (ft_word_count(s, c) + 1));
+	res = (char **)ft_malloc(sizeof(char *) * (ft_word_count(s, c) + 1));
 	if (!res)
 		return (NULL);
 	return (ft_split2(res, s, c));

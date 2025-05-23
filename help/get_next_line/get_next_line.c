@@ -17,13 +17,10 @@ char	*read_buffer_size(int fd, char *save)
 	char	*buffer;
 	char	*temp;
 	ssize_t	len;
-
-
-
 	
-	buffer = (char *)malloc((BUFFER_SIZE * sizeof(char)) + 1);
+	buffer = (char *)ft_malloc((BUFFER_SIZE * sizeof(char)) + 1);
 	if (!buffer)
-		return (free(save), NULL);
+		return (NULL);
 	while (!ft_check_new_line(save, '\n'))
 	{
 		len = read(fd, buffer, BUFFER_SIZE);
@@ -32,10 +29,10 @@ char	*read_buffer_size(int fd, char *save)
 		buffer[len] = '\0';
 		temp = ft_str_join(save, buffer);
 		if (!temp)
-			return (free(buffer), free(save), NULL);
+			return (NULL);
 		save = temp;
 	}
-	return (free(buffer), save);
+	return (save);
 }
 
 char	*read_line(char *save)
@@ -50,7 +47,7 @@ char	*read_line(char *save)
 		i++;
 	if (save[i] == '\n')
 		i++;
-	line = malloc(i + 1);
+	line = ft_malloc(i + 1);
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -72,15 +69,15 @@ char	*next_line(char **tmp)
 	int		j;
 
 	if (!*tmp || !(*tmp)[0])
-		return (free(*tmp), *tmp = NULL, NULL);
+		return (*tmp = NULL, NULL);
 	i = 0;
 	while ((*tmp)[i] && (*tmp)[i] != '\n')
 		i++;
 	if ((*tmp)[i] == '\n')
 		i++;
-	save = malloc(ft_strlen(*tmp) - i + 1);
+	save = ft_malloc(ft_strlen(*tmp) - i + 1);
 	if (!save)
-		return (free(*tmp), *tmp = NULL, NULL);
+		return (*tmp = NULL, NULL);
 	j = 0;
 	while ((*tmp)[i + j])
 	{
@@ -88,7 +85,6 @@ char	*next_line(char **tmp)
 		j++;
 	}
 	save[j] = '\0';
-	free(*tmp);
 	*tmp = NULL;
 	return (save);
 }
@@ -99,15 +95,15 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0)
-		return (free(save), save = NULL, NULL);
+		return (save = NULL, NULL);
 	save = read_buffer_size(fd, save);
 	if (!save)
 		return (NULL);
 	line = read_line(save);
 	if (!line)
-		return (free(save), save = NULL, NULL);
+		return (save = NULL, NULL);
 	save = next_line(&save);
 	if (save && !save[0])
-		return (free(save), save = NULL, line);
+		return (save = NULL, line);
 	return (line);
 }
