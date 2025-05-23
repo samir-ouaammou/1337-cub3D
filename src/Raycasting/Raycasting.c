@@ -4,7 +4,7 @@ void init_player(t_map_config *g);
 
 void init(t_map_config *g)
 {
-	mlx_mouse_hide(g->mlx, g->win);
+	// mlx_mouse_hide(g->mlx, g->win);
 	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
 	g->data_pixel = mlx_get_data_addr(g->img, &g->bpp, &g->size_line, &g->endian);
 	g->textures.wall_img = mlx_xpm_file_to_image(g->mlx, "./wall.xpm", &g->textures.wall_width, &g->textures.wall_height);
@@ -124,6 +124,8 @@ int draw_map(t_map_config *g)
 
 void	ft_free_image(t_map_config *game)
 {
+	if (game->img)
+    mlx_destroy_image(game->mlx, game->img);
 	if (game->textures.img)
 		mlx_destroy_image(game->mlx, game->textures.img);
 	if (game->textures.door_img)
@@ -145,8 +147,8 @@ void	ft_free_image(t_map_config *game)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
+	ft_exit(0);
 }
-
 
 int key_press(int keycode, t_map_config *g)
 {
