@@ -263,7 +263,7 @@ void get_wall_side0(t_map_config *game, double distance, double angle, int *text
 		*texture_x = 0;
     if (*texture_x >= game->textures.wall_width)
 		*texture_x = game->textures.wall_width - 1;
-    *wall_img = (game->dx > 0) ? game->no_img : game->so_img;
+    *wall_img = (game->dx > 0) ? game->textures.no_img : game->textures.so_img;
 }
 
 void get_wall_side1(t_map_config *game, double distance, double angle, int *texture_x, void **wall_img)
@@ -275,7 +275,7 @@ void get_wall_side1(t_map_config *game, double distance, double angle, int *text
 		*texture_x = 0;
     if (*texture_x >= game->textures.wall_width)
 		*texture_x = game->textures.wall_width - 1;
-    *wall_img = (game->dy > 0) ? game->we_img : game->ea_img;
+    *wall_img = (game->dy > 0) ? game->textures.we_img : game->textures.ea_img;
 }
 
 void draw_door_texture(int screen_x, int y, double start_y, double wall_height, t_map_config *game, int side, double distance, double angle, double start_angle)

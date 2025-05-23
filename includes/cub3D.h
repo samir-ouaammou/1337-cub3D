@@ -91,13 +91,31 @@ typedef struct s_parsing
 
 typedef struct s_textures
 {
-	void            *wall_img;
-	void            *door_img;
 	void            *img;
-	int             wall_width;
-	int             wall_height;
+
+    char		    *no_img;
+	int             no_width;
+	int             no_height;
+
+    char		    *so_img;
+	int             so_width;
+	int             so_height;
+
+    char		    *we_img;
+	int             we_width;
+	int             we_height;
+
+    char		    *ea_img;
+	int             ea_width;
+	int             ea_height;
+
+	void            *door_img;
 	int             door_width;
 	int             door_height;
+
+	void            *wall_img;
+	int             wall_width;
+	int             wall_height;
 } t_textures;
 
 typedef struct s_draw_textures
@@ -126,10 +144,6 @@ typedef struct s_map_config
     void            *win;
     void            *img;
     char    	    **map;
-    char		    *no_img;
-    char		    *so_img;
-    char		    *we_img;
-    char		    *ea_img;
     int     	    floor_color[3];
     int     	    ceiling_color[3];
     int             map_width;

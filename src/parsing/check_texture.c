@@ -2,10 +2,7 @@
 
 void	ft_check_path_to_the_north_texture_is_valid(t_parsing *data)
 {
-	int	width;
-	int	height;
-
-	if (data->data->no_img)
+	if (data->data->textures.no_img)
 	{
 		write (2, "Error\nDuplicate texture identifier: ", 36);
 		write (2, "NO\nEach texture (NO, SO, WE, EA) ", 33);
@@ -16,9 +13,10 @@ void	ft_check_path_to_the_north_texture_is_valid(t_parsing *data)
 		write (2, "Error\nInvalid north texture path\nExample: ", 42);
 		ft_print_error ("NO ./path_to_the_north_texture.xpm\n");
 	}
-	data->data->no_img = mlx_xpm_file_to_image(data->data->mlx,
-			data->split[1], &width, &height);
-	if (!data->data->no_img)
+	data->data->textures.no_img = mlx_xpm_file_to_image(data->data->mlx,
+			data->split[1], &data->data->textures.no_width,
+			&data->data->textures.no_height);
+	if (!data->data->textures.no_img)
 	{
 		write (2, "Error\nFailed to load north texture\nCheck the path: ", 51);
 		ft_print_error("NO ./path_to_the_north_texture.xpm\n");
@@ -27,10 +25,7 @@ void	ft_check_path_to_the_north_texture_is_valid(t_parsing *data)
 
 void	ft_check_path_to_the_south_texture_is_valid(t_parsing *data)
 {
-	int	width;
-	int	height;
-
-	if (data->data->so_img)
+	if (data->data->textures.so_img)
 	{
 		write (2, "Error\nDuplicate texture identifier: ", 36);
 		write (2, "SO\nEach texture (NO, SO, WE, EA) ", 33);
@@ -41,9 +36,10 @@ void	ft_check_path_to_the_south_texture_is_valid(t_parsing *data)
 		write (2, "Error\nInvalid south texture path\nExample: ", 42);
 		ft_print_error ("SO ./path_to_the_south_texture.xpm\n");
 	}
-	data->data->so_img = mlx_xpm_file_to_image(data->data->mlx,
-			data->split[1], &width, &height);
-	if (!data->data->so_img)
+	data->data->textures.so_img = mlx_xpm_file_to_image(data->data->mlx,
+			data->split[1], &data->data->textures.so_width,
+			&data->data->textures.so_height);
+	if (!data->data->textures.so_img)
 	{
 		write (2, "Error\nFailed to load south texture\nCheck the path: ", 51);
 		ft_print_error ("SO ./path_to_the_south_texture.xpm\n");
@@ -52,10 +48,7 @@ void	ft_check_path_to_the_south_texture_is_valid(t_parsing *data)
 
 void	ft_check_path_to_the_west_texture_is_valid(t_parsing *data)
 {
-	int	width;
-	int	height;
-
-	if (data->data->we_img)
+	if (data->data->textures.we_img)
 	{
 		write (2, "Error\nDuplicate texture identifier: ", 36);
 		write (2, "WE\nEach texture (NO, SO, WE, EA) ", 33);
@@ -66,9 +59,10 @@ void	ft_check_path_to_the_west_texture_is_valid(t_parsing *data)
 		write (2, "Error\nInvalid west texture path\nExample: ", 41);
 		ft_print_error ("WE ./path_to_the_west_texture.xpm\n");
 	}
-	data->data->we_img = mlx_xpm_file_to_image(data->data->mlx,
-			data->split[1], &width, &height);
-	if (!data->data->we_img)
+	data->data->textures.we_img = mlx_xpm_file_to_image(data->data->mlx,
+			data->split[1], &data->data->textures.we_width,
+			&data->data->textures.we_height);
+	if (!data->data->textures.we_img)
 	{
 		write (2, "Error\nFailed to load west texture\nCheck the path: ", 50);
 		ft_print_error ("WE ./path_to_the_west_texture.xpm\n");
@@ -77,10 +71,7 @@ void	ft_check_path_to_the_west_texture_is_valid(t_parsing *data)
 
 void	ft_check_path_to_the_east_texture_is_valid(t_parsing *data)
 {
-	int	width;
-	int	height;
-
-	if (data->data->ea_img)
+	if (data->data->textures.ea_img)
 	{
 		write (2, "Error\nDuplicate texture identifier: ", 36);
 		write (2, "EA\nEach texture (NO, SO, WE, EA) ", 33);
@@ -91,9 +82,10 @@ void	ft_check_path_to_the_east_texture_is_valid(t_parsing *data)
 		write (2, "Error\nInvalid east texture path\nExample: ", 41);
 		ft_print_error ("EA ./path_to_the_east_texture.xpm\n");
 	}
-	data->data->ea_img = mlx_xpm_file_to_image(data->data->mlx,
-			data->split[1], &width, &height);
-	if (!data->data->ea_img)
+	data->data->textures.ea_img = mlx_xpm_file_to_image(data->data->mlx,
+			data->split[1], &data->data->textures.ea_width,
+			&data->data->textures.ea_height);
+	if (!data->data->textures.ea_img)
 	{
 		write (2, "Error\nFailed to load east texture\nCheck the path: ", 50);
 		ft_print_error ("EA ./path_to_the_east_texture.xpm\n");
