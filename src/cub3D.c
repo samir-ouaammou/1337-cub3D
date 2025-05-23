@@ -21,7 +21,7 @@ int main(int ac, char **av)
         ft_print_error("Error\nmlx_init\n");
     map = ft_parsing_map_file(map, av[1]);
     map->win = mlx_new_window(map->mlx, 1280, 600, "cub3D");
-    // ft_put_img(map); // 
+    ft_put_img(map); // 
     raycasting(map);
     mlx_loop(map->mlx);
     ft_exit(0);
