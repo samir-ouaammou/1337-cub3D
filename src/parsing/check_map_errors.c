@@ -14,7 +14,8 @@ void	ft_check_map(char **map, short i, short j, short player)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (!ft_cheh_is_player(map[i][j]) && map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'D' && map[i][j] != ' ')
+			if (!ft_cheh_is_player(map[i][j]) && map[i][j] != '0'
+				&& map[i][j] != '1' && map[i][j] != 'D' && map[i][j] != ' ')
 			{
 				write(2, "Error\nInvalid character found. Only ", 36);
 				write (2, "'1', '0', 'N', 'S', 'E', 'W','D' ", 33);
