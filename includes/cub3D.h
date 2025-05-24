@@ -20,8 +20,8 @@
 #define WIDTH 1280
 #define HEIGHT 600
 #define BLOCK 8
-#define SPEED_CAMERA 0.05
-#define SPEED_PLAYER 0.7
+#define SPEED_CAMERA 0.06
+#define SPEED_PLAYER 0.8
 #define DEG2RAD 0.017453292519943295
 #define FOV (68.0 * DEG2RAD)
 #define BUFFER_SIZE 1
@@ -173,7 +173,19 @@ typedef struct s_map_config
     int             y_door;
     int             close_kay;
 	double	        player_angle;
-
+    double dis_y;
+    double dis_x;
+    int step_x;
+    int step_y;
+    int side;
+    int map_x;
+    int map_y;
+    double new_x;
+    double new_y;
+    double b3id_x;
+    double b3id_y;
+    double a9rib_x;
+    double a9rib_y;
     t_image         image;
     t_index         index;
     t_strs          strs;
@@ -209,13 +221,27 @@ void	            ft_check_elements(char **map, size_t i, size_t j, size_t len);
 void                ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int end);
 
 
+void handle_key_press(t_map_config *g, int keycode);
+int is_looking_at_door(t_map_config *g, int c);
+void initialize_ray_steps(t_map_config *game);
+void draw_sky_and_floor(t_map_config *game);
+int color_c(t_map_config *game);
+int color_f(t_map_config *game);
+void ft_free_image(t_map_config *game);
+int draw_map(t_map_config *g);
+void init_player(t_map_config *g);
+void clear_image(t_map_config *game);
+void draw_tile(t_map_config *g, int x, int y, int color);
+void cast_single_ray(t_map_config *game);
+void mo_player_u(t_map_config *g, double cos_angle, double sin_angle);
+int mo_player(t_map_config *g);
+void ft_free_image(t_map_config *game);
 void                init(t_map_config *g);
 int                 draw_map(t_map_config *g);
 int                 draw_loop(t_map_config *game);
 int                 raycasting(t_map_config *map);
 int                 key_press(int keycode, t_map_config *g);
 int                 key_release(int keycode, t_map_config *g);
-
 int                 get_pixel_color(void *img, int x, int y);
 void                put_pixel(int x, int y, int color, t_map_config *g);
 #endif
