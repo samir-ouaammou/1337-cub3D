@@ -44,7 +44,7 @@ OBJS_HELP = $(SRCS_HELP:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror  #-g -g3 -fsanitize=address
 
 MLX = -lmlx -lXext -lX11 -lm
 
