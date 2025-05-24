@@ -4,7 +4,7 @@ void init_player(t_map_config *g);
 
 void init(t_map_config *g)
 {
-	// mlx_mouse_hide(g->mlx, g->win);
+	mlx_mouse_hide(g->mlx, g->win);
 	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
 	g->data_pixel = mlx_get_data_addr(g->img, &g->bpp, &g->size_line, &g->endian);
 	g->textures.wall_img = mlx_xpm_file_to_image(g->mlx, "./wall.xpm", &g->textures.wall_width, &g->textures.wall_height);
@@ -310,87 +310,6 @@ void clear_image(t_map_config *game)
 int apply_distance_shading(int color, double distance);
 
 
-void get_wall_side0(t_map_config *game, double distance, double angle, int *texture_x, void **wall_img)
-{
-    double wall_hit = game->player.y + (distance / cos(angle - game->angle)) * game->dy;
-    wall_hit = fmod(wall_hit, BLOCK);
-    *texture_x = (int)(wall_hit * game->textures.wall_width / BLOCK);
-    if (*texture_x < 0)
-		*texture_x = 0;
-    if (*texture_x >= game->textures.wall_width)
-		*texture_x = game->textures.wall_width - 1;
-    *wall_img = (game->dx > 0) ? game->textures.no_img : game->textures.so_img;
-}
-
-void get_wall_side1(t_map_config *game, double distance, double angle, int *texture_x, void **wall_img)
-{
-    double wall_hit = game->player.x + (distance / cos(angle - game->angle)) * game->dx;
-    wall_hit = fmod(wall_hit, BLOCK);
-    *texture_x = (int)(wall_hit * game->textures.wall_width / BLOCK);
-    if (*texture_x < 0)
-		*texture_x = 0;
-    if (*texture_x >= game->textures.wall_width)
-		*texture_x = game->textures.wall_width - 1;
-    *wall_img = (game->dy > 0) ? game->textures.we_img : game->textures.ea_img;
-}
-
-void draw_door_texture(int screen_x, int y, double start_y, double wall_height, t_map_config *game, int side, double distance, double angle, double start_angle)
-{
-    int texture_x, texture_y;
-    double wall_hit;
-    void *door_img = game->textures.door_img;
-
-    if (side == 0)
-        wall_hit = game->player.y + (distance / cos(angle - start_angle)) * game->dy;
-    else
-        wall_hit = game->player.x + (distance / cos(angle - start_angle)) * game->dx;
-    wall_hit = fmod(wall_hit, BLOCK);
-    if (wall_hit < 0)
-        wall_hit += BLOCK;
-
-    texture_x = (int)(wall_hit * game->textures.door_width / BLOCK);
-    if (texture_x < 0)
-		texture_x = 0;
-    if (texture_x >= game->textures.door_width)
-		texture_x = game->textures.door_width - 1;
-
-    texture_y = ((y - start_y) * game->textures.door_height) / (int)wall_height;
-    if (texture_y < 0)
-		texture_y = 0;
-    if (texture_y >= game->textures.door_height)
-		texture_y = game->textures.door_height - 1;
-
-    int color = get_pixel_color(door_img, texture_x, texture_y);
-    put_pixel(screen_x, y, color, game);
-}
-
-void ft_draw_textures(int screen_x, double start_y, double end_y, int hit_wall, int hit_door, int side, double distance, double angle, double wall_height, t_map_config *game)
-{
-    int color = 0;
-    for (int y = (int)start_y; y < (int)end_y; y++)
-    {
-        if (hit_wall)
-        {
-            int texture_x;
-            void *wall_img;
-            if (side == 0)
-                get_wall_side0(game, distance, angle, &texture_x, &wall_img);
-            else
-                get_wall_side1(game, distance, angle, &texture_x, &wall_img);
-            int texture_y = ((y - start_y) * game->textures.wall_height) / (int)wall_height;
-            if (texture_y < 0) texture_y = 0;
-            if (texture_y >= game->textures.wall_height) texture_y = game->textures.wall_height - 1;
-            color = get_pixel_color(wall_img, texture_x, texture_y);
-        }
-        else if (hit_door)
-        {
-            draw_door_texture(screen_x, y, start_y, wall_height, game, side, distance, angle, game->angle);
-            continue;
-        }
-        put_pixel(screen_x, y, color, game);
-    }
-}
-
 int color_f(t_map_config *game)
 {
 	 return (game->floor_color[0] << 16) | (game->floor_color[1] << 8) | game->floor_color[2];
@@ -406,12 +325,12 @@ int draw_loop(t_map_config *game)
 	clear_image(game);
 	game->ray_salib = game->angle - FOV / 2;
 	game->ray_mojab = game->angle + FOV / 2;
-	double angle = game->ray_salib;
-	int screen_x = 0;
-	while (angle < game->ray_mojab)
+	game->draw.start_angle = game->ray_salib;
+	game->draw.screen_x = 0;
+	while (game->draw.start_angle < game->ray_mojab)
 	{
-		game->dx = cos(angle);
-		game->dy = sin(angle);
+		game->dx = cos(game->draw.start_angle);
+		game->dy = sin(game->draw.start_angle);
 		double player_x = game->player.x;
 		double player_y = game->player.y;
 		int map_x = (int)(player_x / BLOCK);
@@ -440,9 +359,9 @@ int draw_loop(t_map_config *game)
 			step_y = 1;
 			dis_y = fabs(((player_y - ((map_y + 1) * BLOCK)) / BLOCK) * (BLOCK / game->dy));
 		}
-		int side = 0;
-		int hit_wall = 0;
-		int hit_door = 0;
+		game->draw.side = 0;
+		game->draw.hit_wall = 0;
+		game->draw.hit_door = 0;
 		int j = 0;
 		while (1)
 		{
@@ -450,62 +369,61 @@ int draw_loop(t_map_config *game)
 			{
 				dis_x += fabs(BLOCK / game->dx);
 				map_x += step_x;
-				side = 0;
+				game->draw.side = 0;
 			}
 			else
 			{
 				dis_y += fabs(BLOCK / game->dy);
 				map_y += step_y;
-				side = 1;
+				game->draw.side = 1;
 			}
 			if (game->map[map_y][map_x] == '1' || game->map[map_y][map_x] == 'D')
 			{
 				if (game->map[map_y][map_x] == '1')
-					hit_wall = 1;
+					game->draw.hit_wall = 1;
 				else if (game->map[map_y][map_x] == 'D')
-					hit_door = 1;
+					game->draw.hit_door = 1;
 				break;
 			}
 			j++;
 		}
-		double distance;
 		double start_y1 = HEIGHT / 2;
 		double end_y1 = 0;
 		for (double y = start_y1; y > end_y1; y--)
 		{
-			put_pixel(screen_x, y, color_c(game), game);
+			put_pixel(game->draw.screen_x, y, color_c(game), game);
 		}
 		double start_y2 = HEIGHT / 2;
 		double end_y2 = WIDTH;
 		for (double y = start_y2; y < end_y2; y++)
 		{
-			put_pixel(screen_x, y, color_f(game), game);
+			put_pixel(game->draw.screen_x, y, color_f(game), game);
 		}
-		if (side == 0)
+		if (game->draw.side == 0)
 		{
 			double player_BLOCK_x = player_x / BLOCK;
 			if (step_x < 0)
-				distance = (map_x + 1 - player_BLOCK_x) * BLOCK;
+				game->draw.distance = (map_x + 1 - player_BLOCK_x) * BLOCK;
 			else
-				distance = (map_x - player_BLOCK_x) * BLOCK;
-			distance = fabs(distance / game->dx);
+				game->draw.distance = (map_x - player_BLOCK_x) * BLOCK;
+			game->draw.distance = fabs(game->draw.distance / game->dx);
 		}
 		else
 		{
 			double player_BLOCK_y = player_y / BLOCK;
 			if (step_y < 0)
-				distance = (map_y + 1 - player_BLOCK_y) * BLOCK;
+				game->draw.distance = (map_y + 1 - player_BLOCK_y) * BLOCK;
 			else
-				distance = (map_y - player_BLOCK_y) * BLOCK;
-			distance = fabs(distance / game->dy);
+				game->draw.distance = (map_y - player_BLOCK_y) * BLOCK;
+			game->draw.distance = fabs(game->draw.distance / game->dy);
 		}
-		distance = distance * cos(angle - game->angle);
-		double wall_height = (BLOCK * HEIGHT) / distance;
-		double start_y = (HEIGHT / 2) - (wall_height / 2);
-		double end_y = (HEIGHT / 2) + (wall_height / 2);
-		ft_draw_textures(screen_x, start_y, end_y, hit_wall, hit_door, side, distance, angle, wall_height, game); // Samir
-		screen_x++;
-		angle += 0.0009;
+		game->draw.distance = game->draw.distance * cos(game->draw.start_angle - game->angle);
+		game->draw.wall_height = (BLOCK * HEIGHT) / game->draw.distance;
+		game->draw.start_y = (HEIGHT / 2) - (game->draw.wall_height / 2);
+		game->draw.end_y = (HEIGHT / 2) + (game->draw.wall_height / 2);
+		ft_draw_textures(game); // Samir
+		game->draw.screen_x++;
+		game->draw.start_angle += 0.0009;
 	}
 	mo_player(game);
 	ft_put_img_to_img(game, 400 , 200, 1);

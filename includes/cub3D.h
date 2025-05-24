@@ -121,21 +121,20 @@ typedef struct s_textures
 
 typedef struct s_draw_textures
 {
-	t_index		S_index;
-	t_textures	S_textures;
-
-	int 	side;
-	int 	screen_x;
-	double 	start_y;
-	int 	hit_wall;
-	int 	hit_door;
-	double 	end_y;
-	double 	distance;
-	double 	start_angle;
-	double 	wall_height;
-	int		color;
-	int 	texture_x;
-	int 	texture_y;
+	int 	        side;
+	int 	        screen_x;
+	double 	        start_y;
+	int 	        hit_wall;
+	int 	        hit_door;
+	double 	        end_y;
+	double 	        distance;
+	double 	        start_angle;
+	double 	        wall_height;
+	int		        color;
+	int 	        texture_x;
+	int 	        texture_y;
+    void            *wall_img;
+    double          wall_hit;
 	
 }	t_draw_textures;
 
@@ -180,6 +179,7 @@ typedef struct s_map_config
     t_strs          strs;
     t_parsing       player;
     t_textures      textures;
+    t_draw_textures draw;
 }   t_map_config;
 
 
@@ -191,6 +191,7 @@ short	            ft_count_len(char **strs);
 int                 ft_map_join(t_parsing *data);
 void                ft_put_img(t_map_config *map);
 void	            ft_init_parsing(t_parsing *data);
+void	            ft_draw_textures(t_map_config *game);
 void                ft_parse_config_line(t_parsing *data);
 void                ft_init_map_config(t_map_config *data);
 char                *ft_replace_whitespace_with_space(char *str);
