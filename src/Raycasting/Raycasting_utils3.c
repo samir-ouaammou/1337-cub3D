@@ -12,14 +12,14 @@
 
 #include "../../includes/cub3D.h"
 
-void	test(t_map_config *game)
+void	test(t_game *game)
 {
 	game->draw.side = 0;
 	game->draw.hit_wall = 0;
 	game->draw.hit_door = 0;
 }
 
-void	cast_single_ray(t_map_config *game)
+void	cast_single_ray(t_game *game)
 {
 	test(game);
 	while (1)

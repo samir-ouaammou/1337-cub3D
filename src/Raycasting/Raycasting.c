@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3D.h"
 
-void	calculate_ray_distance(t_map_config *game)
+void	calculate_ray_distance(t_game *game)
 {
 	double	player_block_x;
 	double	player_block_y;
@@ -37,7 +37,7 @@ void	calculate_ray_distance(t_map_config *game)
 	}
 }
 
-int	draw_loop(t_map_config *game)
+int	draw_loop(t_game *game)
 {
 	clear_image(game);
 	game->ray_salib = game->angle - FOV / 2;
@@ -66,7 +66,7 @@ int	draw_loop(t_map_config *game)
 	return (0);
 }
 
-int	mouse_move(int x, int y, t_map_config *g)
+int	mouse_move(int x, int y, t_game *g)
 {
 	(void)y;
 	g->angle += (x - WIDTH / 2) * 0.0001;
@@ -74,7 +74,7 @@ int	mouse_move(int x, int y, t_map_config *g)
 	return (0);
 }
 
-int	raycasting(t_map_config *map)
+int	raycasting(t_game *map)
 {
 	init(map);
 	mlx_hook(map->win, MotionNotify, PointerMotionMask, mouse_move, map);

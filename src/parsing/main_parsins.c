@@ -1,6 +1,6 @@
 #include "../../includes/cub3D.h"
 
-void	ft_init_map_config(t_map_config *data)
+void	ft_init_game(t_game *data)
 {
 	data->mlx = NULL;
 	data->map = NULL;
@@ -47,7 +47,7 @@ void	ft_print_error(char *str)
 	ft_exit(-1);
 }
 
-t_map_config	*ft_parsing_map_file(t_map_config *map, char *filename)
+t_game	*ft_parsing_map_file(t_game *map, char *filename)
 {
 	t_parsing	data;
 	short		len;

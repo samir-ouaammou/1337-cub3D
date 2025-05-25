@@ -38,7 +38,7 @@
 # define DE 1
 # define BUFFER_SIZE 1
 
-typedef struct s_map_config	t_map_config;
+typedef struct s_game	t_game;
 
 typedef struct s_index
 {
@@ -86,7 +86,7 @@ typedef struct s_parsing
 	bool					key_right;
 	bool					left_rotate;
 	bool					right_rotate;
-	t_map_config			*data;
+	t_game			*data;
 }							t_parsing;
 
 typedef struct s_textures
@@ -137,7 +137,7 @@ typedef struct s_draw_textures
 
 }							t_draw_textures;
 
-typedef struct s_map_config
+typedef struct s_game
 {
 	void					*mlx;
 	void					*win;
@@ -191,7 +191,7 @@ typedef struct s_map_config
 	t_parsing				player;
 	t_textures				textures;
 	t_draw_textures			draw;
-}							t_map_config;
+}							t_game;
 
 void						ft_print_map(void);
 void						*ft_music(void *arg);
@@ -199,16 +199,16 @@ char						*get_next_line(int fd);
 void						ft_print_error(char *str);
 short						ft_count_len(char **strs);
 int							ft_map_join(t_parsing *data);
-void						ft_put_img(t_map_config *map);
+void						ft_put_img(t_game *map);
 void						ft_init_parsing(t_parsing *data);
-void						ft_draw_textures(t_map_config *game);
+void						ft_draw_textures(t_game *game);
 void						ft_parse_config_line(t_parsing *data);
-void						ft_init_map_config(t_map_config *data);
+void						ft_init_game(t_game *data);
 char						*ft_replace_whitespace_with_space(char *str);
 void						ft_check_floor_color(t_parsing *data, char *str);
 void						ft_check_ceiling_color(t_parsing *data, char *str);
 void						ft_check_dor_errors(char **map, size_t i, size_t j);
-t_map_config				*ft_parsing_map_file(t_map_config *map, char *filename);
+t_game				*ft_parsing_map_file(t_game *map, char *filename);
 void						ft_read_map_file(t_parsing *data, short nbr, short bol);
 void						ft_player_location_and_map_size(t_parsing *data, char **str);
 void						ft_check_path_to_the_north_texture_is_valid(t_parsing *data);
@@ -216,30 +216,30 @@ void						ft_check_path_to_the_south_texture_is_valid(t_parsing *data);
 void						ft_check_path_to_the_west_texture_is_valid(t_parsing *data);
 void						ft_check_path_to_the_east_texture_is_valid(t_parsing *data);
 void						ft_check_elements(char **map, size_t i, size_t j, size_t len);
-void						ft_put_img_to_img(t_map_config *game, int x_offset, int y_offset, int end);
+void						ft_put_img_to_img(t_game *game, int x_offset, int y_offset, int end);
 
 
-void						handle_key_press(t_map_config *g, int keycode);
-int							is_looking_at_door(t_map_config *g, int c);
-void						initialize_ray_steps(t_map_config *game);
-void						draw_sky_and_floor(t_map_config *game);
-int							color_c(t_map_config *game);
-int							color_f(t_map_config *game);
-void						ft_free_image(t_map_config *game);
-int							draw_map(t_map_config *g);
-void						init_player(t_map_config *g);
-void						clear_image(t_map_config *game);
-void						draw_tile(t_map_config *g, int x, int y, int color);
-void						cast_single_ray(t_map_config *game);
-void						mo_player_u(t_map_config *g, double cos_angle, double sin_angle);
-int							mo_player(t_map_config *g);
-void						ft_free_image(t_map_config *game);
-void						init(t_map_config *g);
-int							draw_map(t_map_config *g);
-int							draw_loop(t_map_config *game);
-int							raycasting(t_map_config *map);
-int							key_press(int keycode, t_map_config *g);
-int							key_release(int keycode, t_map_config *g);
+void						handle_key_press(t_game *g, int keycode);
+int							is_looking_at_door(t_game *g, int c);
+void						initialize_ray_steps(t_game *game);
+void						draw_sky_and_floor(t_game *game);
+int							color_c(t_game *game);
+int							color_f(t_game *game);
+void						ft_free_image(t_game *game);
+int							draw_map(t_game *g);
+void						init_player(t_game *g);
+void						clear_image(t_game *game);
+void						draw_tile(t_game *g, int x, int y, int color);
+void						cast_single_ray(t_game *game);
+void						mo_player_u(t_game *g, double cos_angle, double sin_angle);
+int							mo_player(t_game *g);
+void						ft_free_image(t_game *game);
+void						init(t_game *g);
+int							draw_map(t_game *g);
+int							draw_loop(t_game *game);
+int							raycasting(t_game *map);
+int							key_press(int keycode, t_game *g);
+int							key_release(int keycode, t_game *g);
 int							get_pixel_color(void *img, int x, int y);
-void						put_pixel(int x, int y, int color, t_map_config *g);
+void						put_pixel(int x, int y, int color, t_game *g);
 #endif

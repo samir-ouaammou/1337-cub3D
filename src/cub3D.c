@@ -2,7 +2,7 @@
 
 int main(int ac, char **av)
 {
-    t_map_config    *map;
+    t_game    *map;
 
     if (ac != 2)
     {
@@ -10,11 +10,11 @@ int main(int ac, char **av)
         write(2, " correctly defined and follows the required format.\n", 52);
         exit (-1);
     }
-    map = ft_malloc(sizeof(t_map_config));
+    map = ft_malloc(sizeof(t_game));
     if (!map)
         ft_print_error("Error\nMemory allocation failed (malloc)\n");
-    memset(map, 0, sizeof(t_map_config)); // ft_?
-    ft_init_map_config(map);
+    memset(map, 0, sizeof(t_game)); // ft_?
+    ft_init_game(map);
     map->mlx = NULL;
     map->mlx = mlx_init();
     if (!map->mlx)

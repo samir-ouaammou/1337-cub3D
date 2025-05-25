@@ -12,17 +12,17 @@
 
 #include "../includes/cub3D.h"
 
-int	is_not_wall(double y, double x, t_map_config *g)
+int	is_not_wall(double y, double x, t_game *g)
 {
 	return (g->map[(int)(y / BLOCK)][(int)(x / BLOCK)] != '1');
 }
 
-int	is_not_door(double y, double x, t_map_config *g)
+int	is_not_door(double y, double x, t_game *g)
 {
 	return (g->map[(int)(y / BLOCK)][(int)(x / BLOCK)] != 'D');
 }
 
-int	check_x_collision(t_map_config *g)
+int	check_x_collision(t_game *g)
 {
 	if (is_not_wall(g->player.y - 1, g->new_x, g) && is_not_wall(g->player.y
 			+ 1, g->new_x - 1, g) && is_not_wall(g->player.y + 1, g->new_x + 1,
@@ -41,7 +41,7 @@ int	check_x_collision(t_map_config *g)
 	return (0);
 }
 
-int	check_y_collision(t_map_config *g)
+int	check_y_collision(t_game *g)
 {
 	if (is_not_wall(g->new_y - 1, g->player.x, g) && is_not_wall(g->new_y + 1,
 			g->player.x, g) && is_not_wall(g->new_y + 1, g->player.x - 1, g)
@@ -53,7 +53,7 @@ int	check_y_collision(t_map_config *g)
 	return (0);
 }
 
-int	mo_player(t_map_config *g)
+int	mo_player(t_game *g)
 {
 	double	cos_angle;
 	double	sin_angle;

@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3D.h"
 
-void	init(t_map_config *g)
+void	init(t_game *g)
 {
 	mlx_mouse_hide(g->mlx, g->win);
 	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
@@ -26,7 +26,7 @@ void	init(t_map_config *g)
 	init_player(g);
 }
 
-void	put_pixel(int x, int y, int color, t_map_config *g)
+void	put_pixel(int x, int y, int color, t_game *g)
 {
 	int	index;
 
@@ -51,7 +51,7 @@ int	get_pixel_color(void *img, int x, int y)
 	return (color);
 }
 
-void	draw_tile(t_map_config *g, int x, int y, int color)
+void	draw_tile(t_game *g, int x, int y, int color)
 {
 	int	i;
 	int	j;
@@ -69,7 +69,7 @@ void	draw_tile(t_map_config *g, int x, int y, int color)
 	}
 }
 
-void	clear_image(t_map_config *game)
+void	clear_image(t_game *game)
 {
 	int	y;
 	int	x;

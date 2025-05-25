@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3D.h"
 
-void	set_player_angle(t_map_config *g, int j, int i)
+void	set_player_angle(t_game *g, int j, int i)
 {
 	if (g->map[i][j] == 'N')
 		g->angle = -M_PI / 2;
@@ -24,7 +24,7 @@ void	set_player_angle(t_map_config *g, int j, int i)
 		g->angle = 0;
 }
 
-void	init_player(t_map_config *g)
+void	init_player(t_game *g)
 {
 	int	i;
 	int	j;
@@ -50,7 +50,7 @@ void	init_player(t_map_config *g)
 	}
 }
 
-void	draw_player(t_map_config *g)
+void	draw_player(t_game *g)
 {
 	int	i;
 	int	j;
@@ -68,7 +68,7 @@ void	draw_player(t_map_config *g)
 	}
 }
 
-int	draw_map(t_map_config *g)
+int	draw_map(t_game *g)
 {
 	int	i;
 	int	j;
@@ -95,7 +95,7 @@ int	draw_map(t_map_config *g)
 	return (0);
 }
 
-void	ft_free_image(t_map_config *game)
+void	ft_free_image(t_game *game)
 {
 	if (game->img)
 		mlx_destroy_image(game->mlx, game->img);

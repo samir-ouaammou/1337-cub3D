@@ -1,16 +1,16 @@
 #include "../../includes/cub3D.h"
 
-int	color_f(t_map_config *game)
+int	color_f(t_game *game)
 {
 	return ((game->floor_color[0] << 16) | (game->floor_color[1] << 8) | game->floor_color[2]);
 }
 
-int	color_c(t_map_config *game)
+int	color_c(t_game *game)
 {
 	return ((game->ceiling_color[0] << 16) | (game->ceiling_color[1] << 8) | game->ceiling_color[2]);
 }
 
-void	draw_sky_and_floor(t_map_config *game)
+void	draw_sky_and_floor(t_game *game)
 {
 	double	y;
 
@@ -28,7 +28,7 @@ void	draw_sky_and_floor(t_map_config *game)
 	}
 }
 
-void	setup_y_direction(t_map_config *game)
+void	setup_y_direction(t_game *game)
 {
     double pl_y;
     
@@ -47,7 +47,7 @@ void	setup_y_direction(t_map_config *game)
 	}
 }
 
-void	initialize_ray_steps(t_map_config *game)
+void	initialize_ray_steps(t_game *game)
 {
     double pl_x;
     

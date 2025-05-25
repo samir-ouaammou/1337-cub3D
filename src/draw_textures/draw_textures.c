@@ -1,6 +1,6 @@
 #include "../../includes/cub3D.h"
 
-void	get_wall_side0(t_map_config *game)
+void	get_wall_side0(t_game *game)
 {
 	game->draw.wall_hit = game->player.y + (game->draw.distance
 			/ cos(game->draw.start_angle - game->angle)) * game->dy;
@@ -17,7 +17,7 @@ void	get_wall_side0(t_map_config *game)
 		game->draw.wall_img = game->textures.so_img;
 }
 
-void	get_wall_side1(t_map_config *game)
+void	get_wall_side1(t_game *game)
 {
 	game->draw.wall_hit = game->player.x + (game->draw.distance
 			/ cos(game->draw.start_angle - game->angle)) * game->dx;
@@ -34,7 +34,7 @@ void	get_wall_side1(t_map_config *game)
 		game->draw.wall_img = game->textures.ea_img;
 }
 
-void	draw_door_texture(int y, t_map_config *game)
+void	draw_door_texture(int y, t_game *game)
 {
 	if (game->draw.side == 0)
 		game->draw.wall_hit = game->player.y + (game->draw.distance
@@ -62,7 +62,7 @@ void	draw_door_texture(int y, t_map_config *game)
 	put_pixel(game->draw.screen_x, y, game->color, game);
 }
 
-void	ft_draw_textures(t_map_config *game)
+void	ft_draw_textures(t_game *game)
 {
 	int	y;
 

@@ -12,7 +12,7 @@
 
 #include "../includes/cub3D.h"
 
-void	handle_door_interaction(t_map_config *g, int keycode)
+void	handle_door_interaction(t_game *g, int keycode)
 {
 	int	player_map_x;
 	int	player_map_y;
@@ -39,7 +39,7 @@ void	handle_door_interaction(t_map_config *g, int keycode)
 	}
 }
 
-int	key_press(int keycode, t_map_config *g)
+int	key_press(int keycode, t_game *g)
 {
 	g->b3id_x = g->player.x + cos(g->angle) * 10;
 	g->b3id_y = g->player.y + sin(g->angle) * 10;
@@ -55,7 +55,7 @@ int	key_press(int keycode, t_map_config *g)
 	return (0);
 }
 
-void	key_release_u(int keycode, t_map_config *g)
+void	key_release_u(int keycode, t_game *g)
 {
 	if (keycode == LEFT)
 		g->player.left_rotate = false;
@@ -63,7 +63,7 @@ void	key_release_u(int keycode, t_map_config *g)
 		g->player.right_rotate = false;
 }
 
-int	key_release(int keycode, t_map_config *g)
+int	key_release(int keycode, t_game *g)
 {
 	if (keycode == SPACE)
 		ft_put_img_to_img(g, 400, 195, 3);
@@ -91,7 +91,7 @@ int	key_release(int keycode, t_map_config *g)
 	return (0);
 }
 
-void	mo_player_u(t_map_config *g, double cos_angle, double sin_angle)
+void	mo_player_u(t_game *g, double cos_angle, double sin_angle)
 {
 	if (g->player.key_up)
 	{

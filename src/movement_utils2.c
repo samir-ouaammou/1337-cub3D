@@ -12,7 +12,7 @@
 
 #include "../includes/cub3D.h"
 
-int	is_looking_at_door(t_map_config *g, int c)
+int	is_looking_at_door(t_game *g, int c)
 {
 	double	dx;
 	double	dy;
@@ -27,7 +27,7 @@ int	is_looking_at_door(t_map_config *g, int c)
 		|| g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == c);
 }
 
-void	handle_key_press(t_map_config *g, int keycode)
+void	handle_key_press(t_game *g, int keycode)
 {
 	if (keycode == A)
 	{

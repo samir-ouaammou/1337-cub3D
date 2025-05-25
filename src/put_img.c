@@ -1,6 +1,6 @@
 #include "../includes/cub3D.h"
 
-void	ft_put_img(t_map_config *map)
+void	ft_put_img(t_game *map)
 {
 	int			tmp;
 	pthread_t	thread;
@@ -18,7 +18,7 @@ void	ft_put_img(t_map_config *map)
 		mlx_destroy_image(map->mlx, map->img);
 }
 
-int	ft_get_start(t_map_config *game, int *end)
+int	ft_get_start(t_game *game, int *end)
 {
 	if (*end == 1)
 		game->index.i = (*end)++;
@@ -27,7 +27,7 @@ int	ft_get_start(t_map_config *game, int *end)
 	return (game->index.i);
 }
 
-void	ft_put_img_to_img(t_map_config *game, int x_offset,
+void	ft_put_img_to_img(t_game *game, int x_offset,
 	int y_offset, int end)
 {
 	game->index.i = ft_get_start(game, &end);
