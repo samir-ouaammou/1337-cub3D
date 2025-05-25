@@ -22,7 +22,7 @@
 # define BLOCK 8
 # define SPEED_CAMERA 0.09
 # define SPEED_PLAYER 0.9
-# define FOV (68.0 * (M_PI / 180.0)) // 68 degrees in radians
+# define FOV (68.0 * (M_PI / 180.0))
 # define BUFFER_SIZE 1
 # define ESC_KEY 65307
 # define W 119
