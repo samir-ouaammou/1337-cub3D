@@ -20,8 +20,8 @@
 # define WIDTH 1280
 # define HEIGHT 600
 # define BLOCK 8
-# define SPEED_CAMERA 0.06
-# define SPEED_PLAYER 0.8
+# define SPEED_CAMERA 0.08
+# define SPEED_PLAYER 0.9
 # define DEG2RAD 0.017453292519943295
 # define FOV (68.0 * DEG2RAD)
 # define BUFFER_SIZE 1
@@ -50,15 +50,6 @@ typedef struct s_index
 	int						k;
 }							t_index;
 
-typedef struct s_strs
-{
-	char					*str;
-	char					*tmp;
-	char					*line;
-	char					**map;
-	char					**strs;
-	char					**split;
-}							t_strs;
 
 typedef struct s_image
 {
@@ -187,7 +178,6 @@ typedef struct s_game
 	double					a9rib_y;
 	t_image					image;
 	t_index					index;
-	t_strs					strs;
 	t_parsing				player;
 	t_textures				textures;
 	t_draw_textures			draw;
@@ -196,19 +186,19 @@ typedef struct s_game
 void						ft_print_map(void);
 void						*ft_music(void *arg);
 char						*get_next_line(int fd);
+void						ft_put_img(t_game *map);
 void						ft_print_error(char *str);
 short						ft_count_len(char **strs);
-int							ft_map_join(t_parsing *data);
-void						ft_put_img(t_game *map);
-void						ft_init_parsing(t_parsing *data);
-void						ft_draw_textures(t_game *game);
-void						ft_parse_config_line(t_parsing *data);
 void						ft_init_game(t_game *data);
+int							ft_map_join(t_parsing *data);
+void						ft_draw_textures(t_game *game);
+void						ft_init_parsing(t_parsing *data);
+void						ft_parse_config_line(t_parsing *data);
 char						*ft_replace_whitespace_with_space(char *str);
 void						ft_check_floor_color(t_parsing *data, char *str);
 void						ft_check_ceiling_color(t_parsing *data, char *str);
 void						ft_check_dor_errors(char **map, size_t i, size_t j);
-t_game				*ft_parsing_map_file(t_game *map, char *filename);
+t_game						*ft_parsing_map_file(t_game *map, char *filename);
 void						ft_read_map_file(t_parsing *data, short nbr, short bol);
 void						ft_player_location_and_map_size(t_parsing *data, char **str);
 void						ft_check_path_to_the_north_texture_is_valid(t_parsing *data);
@@ -219,27 +209,27 @@ void						ft_check_elements(char **map, size_t i, size_t j, size_t len);
 void						ft_put_img_to_img(t_game *game, int x_offset, int y_offset, int end);
 
 
-void						handle_key_press(t_game *g, int keycode);
-int							is_looking_at_door(t_game *g, int c);
-void						initialize_ray_steps(t_game *game);
-void						draw_sky_and_floor(t_game *game);
-int							color_c(t_game *game);
-int							color_f(t_game *game);
-void						ft_free_image(t_game *game);
-int							draw_map(t_game *g);
-void						init_player(t_game *g);
-void						clear_image(t_game *game);
-void						draw_tile(t_game *g, int x, int y, int color);
-void						cast_single_ray(t_game *game);
-void						mo_player_u(t_game *g, double cos_angle, double sin_angle);
-int							mo_player(t_game *g);
-void						ft_free_image(t_game *game);
 void						init(t_game *g);
 int							draw_map(t_game *g);
+int							draw_map(t_game *g);
+int							mo_player(t_game *g);
+int							color_c(t_game *game);
+int							color_f(t_game *game);
+void						init_player(t_game *g);
 int							draw_loop(t_game *game);
 int							raycasting(t_game *map);
+void						ft_free_image(t_game *game);
+void						clear_image(t_game *game);
+void						cast_single_ray(t_game *game);
+void						ft_free_image(t_game *game);
+void						draw_sky_and_floor(t_game *game);
 int							key_press(int keycode, t_game *g);
+void						initialize_ray_steps(t_game *game);
+int							is_looking_at_door(t_game *g, int c);
 int							key_release(int keycode, t_game *g);
+void						handle_key_press(t_game *g, int keycode);
 int							get_pixel_color(void *img, int x, int y);
 void						put_pixel(int x, int y, int color, t_game *g);
+void						draw_tile(t_game *g, int x, int y, int color);
+void						mo_player_u(t_game *g, double cos_angle, double sin_angle);
 #endif
