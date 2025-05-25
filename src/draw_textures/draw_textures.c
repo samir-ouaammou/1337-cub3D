@@ -36,7 +36,6 @@ void	get_wall_side1(t_map_config *game)
 
 void	draw_door_texture(int y, t_map_config *game)
 {
-	game->textures.door_img = game->textures.door_img;
 	if (game->draw.side == 0)
 		game->draw.wall_hit = game->player.y + (game->draw.distance
 				/ cos(game->draw.start_angle - game->angle)) * game->dy;
