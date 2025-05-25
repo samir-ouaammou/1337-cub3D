@@ -13,15 +13,15 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include "../../includes/cub3D.h"
+# include "../GarbageCollector/malloc.h"
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include "../../includes/cub3D.h"
-# include "../GarbageCollector/malloc.h"
 
 typedef struct s_list
 {
-	void		*content;
+	void			*content;
 	struct s_list	*next;
 }					t_list;
 

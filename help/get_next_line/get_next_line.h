@@ -17,14 +17,13 @@
 #  define BUFFER_SIZE 1
 # endif
 
+# include "../../includes/cub3D.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-#include "../../includes/cub3D.h"
 
 size_t	ft_strlen(const char *str);
 int		ft_check_new_line(const char *str, char c);
 char	*ft_str_join(char *s1, char *s2);
 
 #endif
-
