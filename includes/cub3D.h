@@ -1,26 +1,26 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../help/GarbageCollector/malloc.h"
-# include "../help/get_next_line/get_next_line.h"
-# include "../help/libft/libft.h"
-# include <SDL2/SDL.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
-# include <fcntl.h>
-# include <math.h>
 # include <mlx.h>
-# include <pthread.h>
-# include <stdbool.h>
+# include <math.h>
+# include <X11/X.h>
+# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <pthread.h>
+# include <stdbool.h>
+# include <SDL2/SDL.h>
+# include <X11/keysym.h>
+# include "../help/libft/libft.h"
+# include "../help/GarbageCollector/malloc.h"
+# include "../help/get_next_line/get_next_line.h"
 
 # define WIDTH 1280
 # define HEIGHT 600
 # define BLOCK 8
-# define SPEED_CAMERA 0.08
+# define SPEED_CAMERA 0.09
 # define SPEED_PLAYER 0.9
 # define DEG2RAD 0.017453292519943295
 # define FOV (68.0 * DEG2RAD)
@@ -232,4 +232,5 @@ int							get_pixel_color(void *img, int x, int y);
 void						put_pixel(int x, int y, int color, t_game *g);
 void						draw_tile(t_game *g, int x, int y, int color);
 void						mo_player_u(t_game *g, double cos_angle, double sin_angle);
+
 #endif
