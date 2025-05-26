@@ -37,5 +37,4 @@ int	main(int ac, char **av)
 	raycasting(map);
 	mlx_loop(map->mlx);
 	ft_exit(0);
-	return (0);
 }
