@@ -1,7 +1,7 @@
-NO ./textures/image.xpm/W_img1
-SO ./textures/image.xpm/W_img2
-WE ./textures/image.xpm/W_img3
-EA ./textures/image.xpm/W_img4
+NO ./textures/W_img1
+SO ./textures/W_img2
+WE ./textures/W_img3
+EA ./textures/W_img4
 
 F 220,100,0
 C 135,206,235

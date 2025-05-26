@@ -21,7 +21,7 @@ void	init(t_game *g)
 	g->textures.wall_img = mlx_xpm_file_to_image(g->mlx, "./wall.xpm",
 			&g->textures.wall_width, &g->textures.wall_height);
 	g->textures.door_img = mlx_xpm_file_to_image(g->mlx,
-			"./textures/image.xpm/D_img", &g->textures.door_width,
+			"./textures/D_img", &g->textures.door_width,
 			&g->textures.door_height);
 	init_player(g);
 }
