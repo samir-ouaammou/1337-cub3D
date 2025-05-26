@@ -209,6 +209,7 @@ void						ft_check_elements(char **map, size_t i, size_t j, size_t len);
 void						ft_put_img_to_img(t_game *game, int x_offset, int y_offset, int end);
 
 
+int						close_window(t_game *game);
 void						init(t_game *g);
 int							draw_map(t_game *g);
 int							draw_map(t_game *g);

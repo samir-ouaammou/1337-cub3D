@@ -6,11 +6,18 @@
 /*   By: aahaded <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:45:55 by aahaded           #+#    #+#             */
-/*   Updated: 2025/05/24 16:45:56 by aahaded          ###   ########.fr       */
+/*   Updated: 2025/05/26 17:15:03 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+int	close_window(t_game *game)
+{
+	ft_free_image(game);
+	ft_exit(0);
+	return (0);
+}
 
 void	test(t_game *game)
 {

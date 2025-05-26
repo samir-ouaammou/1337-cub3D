@@ -6,7 +6,7 @@
 /*   By: aahaded <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:43:03 by aahaded           #+#    #+#             */
-/*   Updated: 2025/05/24 16:43:04 by aahaded          ###   ########.fr       */
+/*   Updated: 2025/05/26 17:16:51 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	raycasting(t_game *map)
 	mlx_loop_hook(map->mlx, draw_loop, map);
 	mlx_hook(map->win, KeyPress, KeyPressMask, key_press, map);
 	mlx_hook(map->win, KeyRelease, KeyReleaseMask, key_release, map);
+	mlx_hook(map->win, 17, 0, close_window, map);
 	mlx_loop(map->mlx);
 	return (0);
 }
