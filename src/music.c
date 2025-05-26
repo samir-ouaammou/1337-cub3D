@@ -1,21 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   music.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: souaammo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/26 19:40:54 by souaammo          #+#    #+#             */
+/*   Updated: 2025/05/26 19:40:57 by souaammo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3D.h"
 
-void    *ft_music(void *arg)
+void	*ft_music(void *arg)
 {
-    while (1)
-    {
-        SDL_Init(SDL_INIT_AUDIO);
-        SDL_AudioSpec wav_spec;
-        Uint32 wav_length;
-        Uint8 *wav_buffer;
-        SDL_LoadWAV((char *)arg, &wav_spec, &wav_buffer, &wav_length);
-        SDL_OpenAudio(&wav_spec, NULL);
-        SDL_PauseAudio(0);
-        SDL_QueueAudio(1, wav_buffer, wav_length);
-        SDL_Delay(40000);
-        SDL_CloseAudio();
-        SDL_FreeWAV(wav_buffer);
-        SDL_Quit();
-    }
-    return (arg);
+	SDL_AudioSpec	wav_spec;
+	Uint32			wav_length;
+	Uint8			*wav_buffer;
+
+	while (1)
+	{
+		SDL_Init (SDL_INIT_AUDIO);
+		SDL_LoadWAV((char *)arg, &wav_spec, &wav_buffer, &wav_length);
+		SDL_OpenAudio(&wav_spec, NULL);
+		SDL_PauseAudio(0);
+		SDL_QueueAudio(1, wav_buffer, wav_length);
+		SDL_Delay(40000);
+		SDL_CloseAudio();
+		SDL_FreeWAV(wav_buffer);
+		SDL_Quit();
+	}
+	return (arg);
 }

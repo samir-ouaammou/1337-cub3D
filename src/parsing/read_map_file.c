@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: souaammo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/26 19:47:10 by souaammo          #+#    #+#             */
+/*   Updated: 2025/05/26 19:47:12 by souaammo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D.h"
 
 void	ft_read_map_file(t_parsing *data, short nbr, short bol)
@@ -38,13 +50,13 @@ void	ft_parse_config_line(t_parsing *data)
 	if (ft_count_len(data->split) != 2)
 		ft_print_map();
 	if (!ft_strcmp(data->split[0], "NO"))
-		ft_check_path_to_the_north_texture_is_valid(data);
+		ft_check_path_north_is_valid(data);
 	else if (!ft_strcmp(data->split[0], "SO"))
-		ft_check_path_to_the_south_texture_is_valid(data);
+		ft_check_path_south_is_valid(data);
 	else if (!ft_strcmp(data->split[0], "WE"))
-		ft_check_path_to_the_west_texture_is_valid(data);
+		ft_check_path_west_is_valid(data);
 	else if (!ft_strcmp(data->split[0], "EA"))
-		ft_check_path_to_the_east_texture_is_valid(data);
+		ft_check_path_east_is_valid(data);
 	else if (!ft_strcmp(data->split[0], "F"))
 		ft_check_floor_color(data, data->split[1]);
 	else if (!ft_strcmp(data->split[0], "C"))

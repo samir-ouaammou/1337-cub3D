@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-   
+
 int	ft_check_new_line(const char *str, char c)
 {
 	size_t	i;

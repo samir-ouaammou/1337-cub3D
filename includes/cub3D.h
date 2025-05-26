@@ -145,6 +145,7 @@ typedef struct s_game
 	void				*win;
 	void				*img;
 	char				**map;
+	void				*addr;
 	int					floor_color[3];
 	int					ceiling_color[3];
 	int					map_width;
@@ -179,6 +180,8 @@ typedef struct s_game
 	int					step_x;
 	int					step_y;
 	int					side;
+	int					len;
+	int					tmp;
 	int					map_x;
 	int					map_y;
 	double				new_x;
@@ -213,10 +216,10 @@ t_game					*ft_parsing_map_file(t_game *map, char *filename);
 void					ft_read_map_file(t_parsing *data, short nbr, short bol);
 void					ft_player_location_and_map_size(t_parsing *data,
 							char **str);
-void					ft_check_path_to_the_north_texture_is_valid(t_parsing *data);
-void					ft_check_path_to_the_south_texture_is_valid(t_parsing *data);
-void					ft_check_path_to_the_west_texture_is_valid(t_parsing *data);
-void					ft_check_path_to_the_east_texture_is_valid(t_parsing *data);
+void					ft_check_path_north_is_valid(t_parsing *data);
+void					ft_check_path_south_is_valid(t_parsing *data);
+void					ft_check_path_west_is_valid(t_parsing *data);
+void					ft_check_path_east_is_valid(t_parsing *data);
 void					ft_check_elements(char **map, size_t i, size_t j,
 							size_t len);
 void					ft_put_img_to_img(t_game *game, int x_offset,
@@ -242,7 +245,7 @@ void					initialize_ray_steps(t_game *game);
 int						is_looking_at_door(t_game *g, int c);
 int						key_release(int keycode, t_game *g);
 void					handle_key_press(t_game *g, int keycode);
-int						get_pixel_color(void *img, int x, int y);
+int						get_pixel_color(t_game *game, void *img, int x, int y);
 void					put_pixel(int x, int y, int color, t_game *g);
 void					draw_tile(t_game *g, int x, int y, int color);
 void					mo_player_u(t_game *g, double cos_angle,

@@ -36,15 +36,15 @@ void	put_pixel(int x, int y, int color, t_game *g)
 	*(unsigned int *)dst = color;
 }
 
-int	get_pixel_color(void *img, int x, int y)
+int	get_pixel_color(t_game *game, void *img, int x, int y)
 {
 	char	*data;
-	int		index;
 	int		color;
+	int		bpp;
+	int		index;
 
-	int bpp, size_line, endian;
-	data = mlx_get_data_addr(img, &bpp, &size_line, &endian);
-	index = y * size_line + x * (bpp / 8);
+	data = mlx_get_data_addr(img, &bpp, &game->len, &game->tmp);
+	index = y * game->len + x * (bpp / 8);
 	color = *(int *)(data + index);
 	return (color);
 }

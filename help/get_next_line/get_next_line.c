@@ -17,7 +17,7 @@ char	*read_buffer_size(int fd, char *save)
 	char	*buffer;
 	char	*temp;
 	ssize_t	len;
-	
+
 	buffer = (char *)ft_malloc((BUFFER_SIZE * sizeof(char)) + 1);
 	if (!buffer)
 		return (NULL);

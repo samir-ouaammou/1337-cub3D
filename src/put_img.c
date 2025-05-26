@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   put_img.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: souaammo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/26 19:46:01 by souaammo          #+#    #+#             */
+/*   Updated: 2025/05/26 19:46:02 by souaammo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3D.h"
 
 void	ft_put_img(t_game *map)
@@ -44,7 +56,7 @@ void	ft_put_img_to_img(t_game *game, int x_offset,
 			game->index.x = -1;
 			while (++game->index.x < game->image.width)
 			{
-				game->image.color = get_pixel_color(game->image.img,
+				game->image.color = get_pixel_color(game, game->image.img,
 						game->index.x, game->index.y);
 				if (game->image.color != 0xff000000)
 					put_pixel(game->index.x + x_offset, game->index.y

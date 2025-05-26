@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: souaammo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/26 19:48:18 by souaammo          #+#    #+#             */
+/*   Updated: 2025/05/26 19:48:20 by souaammo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D.h"
 
 void	get_wall_side0(t_game *game)
@@ -57,7 +69,7 @@ void	draw_door_texture(int y, t_game *game)
 		game->draw.texture_y = 0;
 	if (game->draw.texture_y >= game->textures.door_height)
 		game->draw.texture_y = game->textures.door_height - 1;
-	game->color = get_pixel_color(game->textures.door_img,
+	game->color = get_pixel_color(game, game->textures.door_img,
 			game->draw.texture_x, game->draw.texture_y);
 	put_pixel(game->draw.screen_x, y, game->color, game);
 }
@@ -81,7 +93,7 @@ void	ft_draw_textures(t_game *game)
 				game->draw.texture_y = 0;
 			if (game->draw.texture_y >= game->textures.wall_height)
 				game->draw.texture_y = game->textures.wall_height - 1;
-			game->color = get_pixel_color(game->draw.wall_img,
+			game->color = get_pixel_color(game, game->draw.wall_img,
 					game->draw.texture_x, game->draw.texture_y);
 			put_pixel(game->draw.screen_x, y, game->color, game);
 		}

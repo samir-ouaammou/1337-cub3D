@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_texture.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: souaammo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/26 19:46:53 by souaammo          #+#    #+#             */
+/*   Updated: 2025/05/26 19:46:55 by souaammo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D.h"
 
-void	ft_check_path_to_the_north_texture_is_valid(t_parsing *data)
+void	ft_check_path_north_is_valid(t_parsing *data)
 {
 	if (data->data->textures.no_img)
 	{
@@ -23,7 +35,7 @@ void	ft_check_path_to_the_north_texture_is_valid(t_parsing *data)
 	}
 }
 
-void	ft_check_path_to_the_south_texture_is_valid(t_parsing *data)
+void	ft_check_path_south_is_valid(t_parsing *data)
 {
 	if (data->data->textures.so_img)
 	{
@@ -46,7 +58,7 @@ void	ft_check_path_to_the_south_texture_is_valid(t_parsing *data)
 	}
 }
 
-void	ft_check_path_to_the_west_texture_is_valid(t_parsing *data)
+void	ft_check_path_west_is_valid(t_parsing *data)
 {
 	if (data->data->textures.we_img)
 	{
@@ -69,7 +81,7 @@ void	ft_check_path_to_the_west_texture_is_valid(t_parsing *data)
 	}
 }
 
-void	ft_check_path_to_the_east_texture_is_valid(t_parsing *data)
+void	ft_check_path_east_is_valid(t_parsing *data)
 {
 	if (data->data->textures.ea_img)
 	{
