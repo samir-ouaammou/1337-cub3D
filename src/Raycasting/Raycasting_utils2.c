@@ -6,7 +6,7 @@
 /*   By: aahaded <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 16:45:44 by aahaded           #+#    #+#             */
-/*   Updated: 2025/05/24 16:45:45 by aahaded          ###   ########.fr       */
+/*   Updated: 2025/05/26 18:26:30 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,12 @@ void	init(t_game *g)
 
 void	put_pixel(int x, int y, int color, t_game *g)
 {
-	int	index;
+	char	*dst;
 
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
 		return ;
-	index = y * g->size_line + x * (g->bpp / 8);
-	g->data_pixel[index] = color & 0xFF;
-	g->data_pixel[index + 1] = (color >> 8) & 0xFF;
-	g->data_pixel[index + 2] = (color >> 16) & 0xFF;
+	dst = g->data_pixel + (y * g->size_line + x * (g->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
 int	get_pixel_color(void *img, int x, int y)

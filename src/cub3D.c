@@ -13,7 +13,7 @@ int main(int ac, char **av)
     map = ft_malloc(sizeof(t_game));
     if (!map)
         ft_print_error("Error\nMemory allocation failed (malloc)\n");
-    memset(map, 0, sizeof(t_game)); // ft_?
+    ft_memset(map, 0, sizeof(t_game));
     ft_init_game(map);
     map->mlx = NULL;
     map->mlx = mlx_init();

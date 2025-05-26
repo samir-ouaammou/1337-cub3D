@@ -36,7 +36,7 @@ int	ft_atoi(const char *str)
 			ft_print_error("Error\nColor value must be between 0 and 255.\n");
 		i++;
 	}
-	if ((str[i] && str[i]  != '\n')|| r > 255 || r * s < 0)
+	if ((str[i] && str[i] != '\n') || r > 255 || r * s < 0)
 		return (-1);
 	return (r * s);
 }

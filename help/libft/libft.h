@@ -6,7 +6,7 @@
 /*   By: souaammo <souaammo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 19:54:13 by souaammo          #+#    #+#             */
-/*   Updated: 2024/10/31 10:29:50 by souaammo         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:01:23 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+void				*ft_memset(void *s, int c, size_t n);
 int					ft_isdigit(int c);
 int					ft_atoi(const char *str);
 char				*ft_itoa(int n);

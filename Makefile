@@ -32,6 +32,7 @@ SRCS_HELP =	help/libft/ft_atoi.c \
 			help/libft/ft_strrchr.c \
 			help/libft/ft_strtrim.c \
 			help/libft/ft_substr.c \
+			help/libft/ft_memset.c \
 			help/get_next_line/get_next_line.c \
 			help/get_next_line/get_next_line_utils.c \
 			help/GarbageCollector/malloc.c \
