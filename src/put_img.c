@@ -23,7 +23,8 @@ void	ft_put_img(t_game *map)
 	i = -1;
 	while (++i < 2)
 	{
-		map->img = mlx_xpm_file_to_image(map->mlx, ft_strjoin("./textures/image0", ft_itoa(i)), &tmp, &tmp);
+		map->img = mlx_xpm_file_to_image(map->mlx,
+				ft_strjoin("./textures/image0", ft_itoa(i)), &tmp, &tmp);
 		if (map->img)
 		{
 			mlx_put_image_to_window(map->mlx, map->win, map->img, 0, 0);
