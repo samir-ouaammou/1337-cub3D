@@ -27,8 +27,9 @@ typedef struct s_list
 
 void				*ft_memset(void *s, int c, size_t n);
 int					ft_isdigit(int c);
-int					ft_atoi(const char *str);
+// int					ft_atoi(t_parsing *data, const char *str);
 char				*ft_itoa(int n);
+
 size_t				ft_strlen(const char *str);
 char				*ft_strdup(const char *str);
 char				*ft_strchr(const char *str, int c);

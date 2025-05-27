@@ -20,7 +20,7 @@ void	ft_read_map_file(t_parsing *data, short nbr, short bol)
 		data->line = get_next_line(data->fd);
 		if (!data->line)
 			break ;
-		data->line = ft_replace_whitespace_with_space(data->line);
+		data->line = ft_replace_whitespace_with_space(data);
 		if (nbr < 6)
 			data->line = ft_strtrim(data->line, " ");
 		if (data->line[0] == '\n' && bol)
@@ -30,7 +30,7 @@ void	ft_read_map_file(t_parsing *data, short nbr, short bol)
 			if (bol == 42 && ft_strtrim(data->line, " \t\n\v\f\r"))
 			{
 				write (2, "Error\nInvalid map: ", 19);
-				ft_print_error("the map contains errors.\n");
+				ft_print_error(data->game, "the map contains errors.\n");
 			}
 			if (nbr < 6)
 				ft_parse_config_line(data);
@@ -46,7 +46,8 @@ void	ft_parse_config_line(t_parsing *data)
 	data->line = ft_strtrim(data->line, " \n");
 	data->split = ft_split(data->line, ' ');
 	if (!data->split)
-		ft_print_error("Error\nMemory allocation failed (malloc)\n");
+		ft_print_error(data->game,
+			"Error\nMemory allocation failed (malloc)\n");
 	if (ft_count_len(data->split) != 2)
 		ft_print_map();
 	if (!ft_strcmp(data->split[0], "NO"))
@@ -65,16 +66,19 @@ void	ft_parse_config_line(t_parsing *data)
 		ft_print_map();
 }
 
-char	*ft_replace_whitespace_with_space(char *str)
+char	*ft_replace_whitespace_with_space(t_parsing *data)
 {
 	short	i;
 	char	*res;
+	char	*str;
 
+	str = data->line;
 	if (!str)
 		return (NULL);
 	res = ft_malloc((ft_strlen(str) + 1) * sizeof(char));
 	if (!res)
-		ft_print_error("Error\nMemory allocation failed (malloc)\n");
+		ft_print_error(data->game,
+			"Error\nMemory allocation failed (malloc)\n");
 	i = 0;
 	while (str[i])
 	{
@@ -105,7 +109,8 @@ int	ft_map_join(t_parsing *data)
 {
 	data->tmp = ft_strjoin(data->str, data->line);
 	if (!data->tmp)
-		ft_print_error("Error\nMemory allocation failed (malloc)\n");
+		ft_print_error(data->game,
+			"Error\nMemory allocation failed (malloc)\n");
 	data->str = data->tmp;
 	return (1);
 }

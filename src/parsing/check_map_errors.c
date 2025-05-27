@@ -19,8 +19,11 @@ int	ft_cheh_is_player(char c)
 	return (0);
 }
 
-void	ft_check_map(char **map, short i, short j, short player)
+void	ft_check_map(t_parsing *data, short i, short j, short player)
 {
+	char	**map;
+
+	map = data->map;
 	while (map[++i])
 	{
 		j = -1;
@@ -31,7 +34,7 @@ void	ft_check_map(char **map, short i, short j, short player)
 			{
 				write(2, "Error\nInvalid character found. Only ", 36);
 				write (2, "'1', '0', 'N', 'S', 'E', 'W','D' ", 33);
-				ft_print_error("and space are allowed.\n");
+				ft_print_error(data->game, "and space are allowed.\n");
 			}
 			if (ft_cheh_is_player(map[i][j]))
 				player++;
@@ -41,12 +44,15 @@ void	ft_check_map(char **map, short i, short j, short player)
 	{
 		write(2, "Error\nThere must be exactly one player starting position ",
 			57);
-		ft_print_error("('N', 'S', 'E', or 'W') in the map.\n");
+		ft_print_error(data->game, "('N', 'S', 'E', or 'W') in the map.\n");
 	}
 }
 
-void	ft_check_elements(char **map, size_t i, size_t j, size_t len)
+void	ft_check_elements(t_parsing *data, size_t i, size_t j, size_t len)
 {
+	char	**map;
+
+	map = data->map;
 	i = -1;
 	while (map[++i])
 	{
@@ -60,13 +66,11 @@ void	ft_check_elements(char **map, size_t i, size_t j, size_t len)
 					- 1] == ' ' || !map[i + 1][j] || map[i + 1][j] == ' '
 					|| map[i - 1][j] == ' ' || ft_strlen(map[i + 1]) < j + 1
 					|| ft_strlen(map[i - 1]) < j + 1)
-				{
-					printf("Error\nMap is not closed around (?,?).\n");
-					ft_exit(-1);
-				}
+					ft_print_error(data->game,
+						"Error\nMap is not closed around (?,?).\n");
 			}
 		}
 	}
-	ft_check_map(map, -1, -1, 0);
-	ft_check_dor_errors(map, -1, -1);
+	ft_check_map(data, -1, -1, 0);
+	ft_check_dor_errors(data, -1, -1);
 }

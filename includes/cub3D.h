@@ -79,6 +79,7 @@ typedef struct s_parsing
 	char				*str;
 	char				**split;
 	char				**map;
+	t_game				*game;
 
 	double				x;
 	double				y;
@@ -187,22 +188,23 @@ typedef struct s_game
 	t_textures			textures;
 	t_draw_textures		draw;
 }						t_game;
-
+int						ft_atoi(t_parsing *data, const char *str, int i);
 void					ft_print_map(void);
 void					*ft_music(void *arg);
 char					*get_next_line(int fd);
 void					ft_put_img(t_game *map);
-void					ft_print_error(char *str);
+void					ft_print_error(t_game *game, char *str);
 short					ft_count_len(char **strs);
 void					ft_init_game(t_game *data);
 int						ft_map_join(t_parsing *data);
 void					ft_draw_textures(t_game *game);
 void					ft_init_parsing(t_parsing *data);
 void					ft_parse_config_line(t_parsing *data);
-char					*ft_replace_whitespace_with_space(char *str);
+char					*ft_replace_whitespace_with_space(t_parsing *data);
 void					ft_check_floor_color(t_parsing *data, char *str);
 void					ft_check_ceiling_color(t_parsing *data, char *str);
-void					ft_check_dor_errors(char **map, size_t i, size_t j);
+void					ft_check_dor_errors(t_parsing *data,
+							size_t i, size_t j);
 t_game					*ft_parsing_map_file(t_game *map, char *filename);
 void					ft_read_map_file(t_parsing *data, short nbr, short bol);
 void					ft_player_location_and_map_size(t_parsing *data,
@@ -211,7 +213,7 @@ void					ft_check_path_north_is_valid(t_parsing *data);
 void					ft_check_path_south_is_valid(t_parsing *data);
 void					ft_check_path_west_is_valid(t_parsing *data);
 void					ft_check_path_east_is_valid(t_parsing *data);
-void					ft_check_elements(char **map, size_t i, size_t j,
+void					ft_check_elements(t_parsing *data, size_t i, size_t j,
 							size_t len);
 void					ft_put_img_to_img(t_game *game, int x_offset,
 							int y_offset, int end);

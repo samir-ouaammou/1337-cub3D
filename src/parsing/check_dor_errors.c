@@ -12,8 +12,11 @@
 
 #include "../../includes/cub3D.h"
 
-void	ft_check_dor_errors(char **map, size_t i, size_t j)
+void	ft_check_dor_errors(t_parsing *data, size_t i, size_t j)
 {
+	char	**map;
+
+	map = data->map;
 	while (map[++i])
 	{
 		j = -1;
@@ -27,7 +30,8 @@ void	ft_check_dor_errors(char **map, size_t i, size_t j)
 				write (2, "Error\nInvalid door 'D' placement — it must ", 45);
 				write (2, "be enclosed by walls ('1') on its left ", 39);
 				write (2, "and right, and must be placed between valid ", 44);
-				ft_print_error ("floor tiles ('0') above and below.\n");
+				ft_print_error (data->game,
+					"floor tiles ('0') above and below.\n");
 			}
 		}
 	}
