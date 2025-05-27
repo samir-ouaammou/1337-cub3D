@@ -14,16 +14,18 @@
 
 void	init(t_game *g)
 {
-	mlx_mouse_hide(g->mlx, g->win);
 	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
 	g->data_pixel = mlx_get_data_addr(g->img, &g->bpp, &g->size_line,
-			&g->endian); // 3andak tansha had xpm ila makanch ghadi imot pro
+			&g->endian);
 	g->textures.wall_img = mlx_xpm_file_to_image(g->mlx,
 			"./textures/wall.xpm", &g->textures.wall_width,
 			&g->textures.wall_height);
 	g->textures.door_img = mlx_xpm_file_to_image(g->mlx,
 			"./textures/D_img", &g->textures.door_width,
 			&g->textures.door_height);
+	if (!g->textures.wall_img || !g->textures.door_img)
+		ft_free_image(g);
+	mlx_mouse_hide(g->mlx, g->win);
 	init_player(g);
 }
 

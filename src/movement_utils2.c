@@ -14,17 +14,17 @@
 
 int	is_looking_at_door(t_game *g, int c)
 {
-	double	dx;
-	double	dy;
-	double	dx_t;
-	double	dy_t;
+	double	b3id_x;
+	double	b3id_y;
+	double	a9rib_x;
+	double	a9rib_y;
 
-	dx = g->player.x + cos(g->angle) * 10;
-	dy = g->player.y + sin(g->angle) * 10;
-	dx_t = g->player.x + cos(g->angle) * 5;
-	dy_t = g->player.y + sin(g->angle) * 5;
-	return (g->map[(int)(dy / BLOCK)][(int)(dx / BLOCK)] == c
-		|| g->map[(int)(dy_t / BLOCK)][(int)(dx_t / BLOCK)] == c);
+	b3id_x = g->player.x + cos(g->angle) * 10;
+	b3id_y = g->player.y + sin(g->angle) * 10;
+	a9rib_x = g->player.x + cos(g->angle) * 5;
+	a9rib_y = g->player.y + sin(g->angle) * 5;
+	return (g->map[(int)(b3id_y / BLOCK)][(int)(b3id_x / BLOCK)] == c
+		|| g->map[(int)(a9rib_y / BLOCK)][(int)(a9rib_x / BLOCK)] == c);
 }
 
 void	handle_key_press(t_game *g, int keycode)

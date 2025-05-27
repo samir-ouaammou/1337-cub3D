@@ -152,12 +152,7 @@ typedef struct s_game
 	int					map_height;
 	double				player_x;
 	double				player_y;
-
-	void				*p_img;
-	int					p_img_height;
-	int					p_img_width;
 	unsigned int		color;
-
 	char				*data_pixel;
 	int					bpp;
 	int					size_line;
@@ -168,13 +163,9 @@ typedef struct s_game
 	float				dx;
 	float				dy;
 	float				angle;
-	int					img_height;
-	int					open_door;
-	int					close_door;
 	int					x_door;
 	int					y_door;
 	int					close_kay;
-	double				player_angle;
 	double				dis_y;
 	double				dis_x;
 	int					step_x;
