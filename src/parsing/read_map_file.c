@@ -49,7 +49,7 @@ void	ft_parse_config_line(t_parsing *data)
 		ft_print_error(data->game,
 			"Error\nMemory allocation failed (malloc)\n");
 	if (ft_count_len(data->split) != 2)
-		ft_print_map();
+		ft_print_map(data->game);
 	if (!ft_strcmp(data->split[0], "NO"))
 		ft_check_path_north_is_valid(data);
 	else if (!ft_strcmp(data->split[0], "SO"))
@@ -63,7 +63,7 @@ void	ft_parse_config_line(t_parsing *data)
 	else if (!ft_strcmp(data->split[0], "C"))
 		ft_check_ceiling_color(data, data->split[1]);
 	else
-		ft_print_map();
+		ft_print_map(data->game);
 }
 
 char	*ft_replace_whitespace_with_space(t_parsing *data)

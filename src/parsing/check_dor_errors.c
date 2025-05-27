@@ -22,10 +22,11 @@ void	ft_check_dor_errors(t_parsing *data, size_t i, size_t j)
 		j = -1;
 		while (map[i][++j])
 		{
-			if ((map[i][j] == 'D')
+			if ((map[i][j] == 'D' && (i == 0 || !map[i + 1]))
+				|| ((map[i][j] == 'D')
 				&& (map[i][j - 1] != '1' || map[i][j + 1] != '1'
 				|| ft_strlen(map[i - 1]) < j || ft_strlen(map[i + 1]) < j
-				|| map[i - 1][j] != '0' || map[i + 1][j] != '0'))
+				|| map[i - 1][j] != '0' || map[i + 1][j] != '0')))
 			{
 				write (2, "Error\nInvalid door 'D' placement — it must ", 45);
 				write (2, "be enclosed by walls ('1') on its left ", 39);

@@ -29,7 +29,7 @@ void	ft_put_img(t_game *map)
 		{
 			mlx_put_image_to_window(map->mlx, map->win, map->img, 0, 0);
 			mlx_destroy_image(map->mlx, map->img);
-			usleep(2000000);
+			usleep(1500000);
 		}
 	}
 }

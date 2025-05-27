@@ -25,7 +25,7 @@ void	init(t_game *g)
 			&g->textures.door_height);
 	if (!g->textures.wall_img || !g->textures.door_img)
 		ft_free_image(g);
-	// mlx_mouse_hide(g->mlx, g->win);
+	mlx_mouse_hide(g->mlx, g->win);
 	init_player(g);
 }
 

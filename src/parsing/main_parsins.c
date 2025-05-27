@@ -37,7 +37,7 @@ void	ft_init_parsing(t_parsing *data)
 	data->map = NULL;
 }
 
-void	ft_print_map(void)
+void	ft_print_map(t_game *game)
 {
 	write (2, "Error\nInvalid map format — please ensure the map is ", 54);
 	write (2, "properly enclosed and contains valid characters only.\n", 54);
@@ -49,14 +49,15 @@ void	ft_print_map(void)
 	write (2, "F 220,100,0\nC 225,30,0\n\n", 24);
 	write (2, "111111111111111\n10000D000001001\n", 32);
 	write (2, "1N1101000101001\n111111111111111\n", 32);
+	ft_free_image(game);
 	ft_exit(-1);
 }
 
 void	ft_print_error(t_game *game, char *str)
 {
-	ft_free_image(game);
 	while (*str)
 		write(2, str++, 1);
+	ft_free_image(game);
 	ft_exit(-1);
 }
 

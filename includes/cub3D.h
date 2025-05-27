@@ -35,7 +35,7 @@
 # define SPEED_CAMERA 0.09
 # define SPEED_PLAYER 0.9
 # define DEG2RAD 0.017453292519943295
-# define FOV (68.0 * DEG2RAD)
+# define FOV 1.18682389136
 # define BUFFER_SIZE 1
 # define ESC_KEY 65307
 # define W 119
@@ -189,7 +189,7 @@ typedef struct s_game
 	t_draw_textures		draw;
 }						t_game;
 int						ft_atoi(t_parsing *data, const char *str, int i);
-void					ft_print_map(void);
+void					ft_print_map(t_game *game);
 void					*ft_music(void *arg);
 char					*get_next_line(int fd);
 void					ft_put_img(t_game *map);
@@ -231,7 +231,6 @@ int						raycasting(t_game *map);
 void					ft_free_image(t_game *game);
 void					clear_image(t_game *game);
 void					cast_single_ray(t_game *game);
-void					ft_free_image(t_game *game);
 void					draw_sky_and_floor(t_game *game);
 int						key_press(int keycode, t_game *g);
 void					initialize_ray_steps(t_game *game);

@@ -37,5 +37,6 @@ int	main(int ac, char **av)
 	ft_put_img(map);
 	raycasting(map);
 	mlx_loop(map->mlx);
+	ft_free_image(map);
 	ft_exit(0);
 }
