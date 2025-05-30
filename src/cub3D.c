@@ -34,7 +34,7 @@ int	main(int ac, char **av)
 	map->player.game = map;
 	map = ft_parsing_map_file(map, av[1]);
 	map->win = mlx_new_window(map->mlx, 1280, 600, "cub3D");
-	ft_put_img(map);
+	// ft_put_img(map);
 	raycasting(map);
 	mlx_loop(map->mlx);
 	ft_free_image(map);

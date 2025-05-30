@@ -188,6 +188,8 @@ typedef struct s_game
 	t_textures			textures;
 	t_draw_textures		draw;
 }						t_game;
+
+int						ft_cheh_is_player(char c);
 int						ft_atoi(t_parsing *data, const char *str, int i);
 void					ft_print_map(t_game *game);
 void					*ft_music(void *arg);

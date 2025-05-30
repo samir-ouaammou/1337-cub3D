@@ -26,7 +26,9 @@ void	ft_check_dor_errors(t_parsing *data, size_t i, size_t j)
 				|| ((map[i][j] == 'D')
 				&& (map[i][j - 1] != '1' || map[i][j + 1] != '1'
 				|| ft_strlen(map[i - 1]) < j || ft_strlen(map[i + 1]) < j
-				|| map[i - 1][j] != '0' || map[i + 1][j] != '0')))
+				|| (map[i - 1][j] != '0' && !ft_cheh_is_player(map[i - 1][j]))
+				|| (map[i + 1][j] != '0'
+					&& !ft_cheh_is_player(map[i + 1][j])))))
 			{
 				write (2, "Error\nInvalid door 'D' placement — it must ", 45);
 				write (2, "be enclosed by walls ('1') on its left ", 39);
