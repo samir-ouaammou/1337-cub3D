@@ -74,6 +74,14 @@ void	draw_door_texture(int y, t_game *game)
 	put_pixel(game->draw.screen_x, y, game->color, game);
 }
 
+void	test2(t_game *game)
+{
+	if (game->draw.side == 0)
+		get_wall_side0(game);
+	else
+		get_wall_side1(game);
+}
+
 void	ft_draw_textures(t_game *game)
 {
 	int	y;
@@ -81,12 +89,11 @@ void	ft_draw_textures(t_game *game)
 	y = (int)game->draw.start_y - 1;
 	while (++y < (int)game->draw.end_y)
 	{
+		if (y > HEIGHT)
+			break ;
 		if (game->draw.hit_wall)
 		{
-			if (game->draw.side == 0)
-				get_wall_side0(game);
-			else
-				get_wall_side1(game);
+			test2(game);
 			game->draw.texture_y = ((y - game->draw.start_y)
 					* game->textures.wall_height) / (int)game->draw.wall_height;
 			if (game->draw.texture_y < 0)

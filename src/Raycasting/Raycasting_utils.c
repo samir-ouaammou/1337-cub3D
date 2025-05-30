@@ -12,30 +12,6 @@
 
 #include "../../includes/cub3D.h"
 
-int	color_f(t_game *game)
-{
-	int	f1;
-	int	f2;
-	int	f3;
-
-	f1 = game->floor_color[0];
-	f2 = game->floor_color[1];
-	f3 = game->floor_color[2];
-	return ((f1 << 16) | (f2 << 8) | f3);
-}
-
-int	color_c(t_game *game)
-{
-	int	c1;
-	int	c2;
-	int	c3;
-
-	c1 = game->ceiling_color[0];
-	c2 = game->ceiling_color[1];
-	c3 = game->ceiling_color[2];
-	return ((c1 << 16) | (c2 << 8) | c3);
-}
-
 void	draw_sky_and_floor(t_game *game)
 {
 	double	y;
@@ -97,4 +73,28 @@ void	initialize_ray_steps(t_game *game)
 				* (BLOCK / game->dx));
 	}
 	setup_y_direction(game);
+}
+
+int	color_f(t_game *game)
+{
+	int	f1;
+	int	f2;
+	int	f3;
+
+	f1 = game->floor_color[0];
+	f2 = game->floor_color[1];
+	f3 = game->floor_color[2];
+	return ((f1 << 16) | (f2 << 8) | f3);
+}
+
+int	color_c(t_game *game)
+{
+	int	c1;
+	int	c2;
+	int	c3;
+
+	c1 = game->ceiling_color[0];
+	c2 = game->ceiling_color[1];
+	c3 = game->ceiling_color[2];
+	return ((c1 << 16) | (c2 << 8) | c3);
 }
