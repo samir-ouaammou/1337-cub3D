@@ -9,7 +9,6 @@
 /*   Updated: 2025/05/24 16:45:03 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../../includes/cub3D.h"
 
 void	set_player_angle(t_game *g, int j, int i)

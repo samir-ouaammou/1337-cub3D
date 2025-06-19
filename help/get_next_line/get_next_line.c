@@ -9,7 +9,6 @@
 /*   Updated: 2024/11/20 14:25:59 by souaammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "get_next_line.h"
 
 char	*read_buffer_size(int fd, char *save)

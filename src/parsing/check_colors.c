@@ -9,7 +9,6 @@
 /*   Updated: 2025/05/26 19:46:27 by souaammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../../includes/cub3D.h"
 
 short	ft_count_commas(char *str)

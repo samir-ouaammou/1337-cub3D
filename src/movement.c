@@ -9,7 +9,6 @@
 /*   Updated: 2025/05/24 16:52:28 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/cub3D.h"
 
 int	is_not_wall(double y, double x, t_game *g)

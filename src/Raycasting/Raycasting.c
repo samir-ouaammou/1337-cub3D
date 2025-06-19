@@ -9,7 +9,6 @@
 /*   Updated: 2025/05/26 17:16:51 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../../includes/cub3D.h"
 
 void	calculate_ray_distance(t_game *game)

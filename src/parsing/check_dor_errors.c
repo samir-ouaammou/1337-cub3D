@@ -9,7 +9,6 @@
 /*   Updated: 2025/05/26 19:46:35 by souaammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../../includes/cub3D.h"
 
 void	ft_check_dor_errors(t_parsing *data, size_t i, size_t j)

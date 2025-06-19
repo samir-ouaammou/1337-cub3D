@@ -9,7 +9,6 @@
 /*   Updated: 2024/11/04 10:56:32 by souaammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 int	ft_atoi(t_parsing *data, const char *str, int i)

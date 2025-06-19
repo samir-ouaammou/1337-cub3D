@@ -9,7 +9,6 @@
 /*   Updated: 2025/05/24 16:52:51 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/cub3D.h"
 
 void	handle_door_interaction(t_game *g, int keycode)

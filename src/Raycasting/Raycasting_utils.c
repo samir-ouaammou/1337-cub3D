@@ -9,7 +9,6 @@
 /*   Updated: 2025/05/26 18:14:46 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../../includes/cub3D.h"
 
 void	draw_sky_and_floor(t_game *game)

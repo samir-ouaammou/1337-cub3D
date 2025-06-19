@@ -9,7 +9,6 @@
 /*   Updated: 2025/05/24 16:53:15 by aahaded          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/cub3D.h"
 
 int	is_looking_at_door(t_game *g, int c)

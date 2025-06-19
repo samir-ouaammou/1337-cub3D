@@ -9,7 +9,6 @@
 /*   Updated: 2025/03/08 01:07:09 by souaammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "malloc.h"
 
 void	ft_lst_add_back(t_malloc **head, t_malloc *new)

@@ -9,7 +9,6 @@
 /*   Updated: 2025/05/26 19:47:26 by souaammo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../../includes/cub3D.h"
 
 void	ft_player_location_and_map_size(t_parsing *data, char **str)

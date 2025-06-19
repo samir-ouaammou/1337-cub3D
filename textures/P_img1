@@ -1,6 +1,6 @@
-/* XPM */
+/* XPM */ 
 static char *pis_0[] = {
-/* columns rows colors chars-per-pixel */
+/* columns rows colors chars-per-pixel */ 
 "512 512 256 2 ",
 "   c #020101",
 ".  c #090605",
