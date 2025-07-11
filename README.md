@@ -1,9 +1,16 @@
 ## 📖 Introduction
 
-**cub3D** is a raycasting-based 3D maze game inspired by *Wolfenstein 3D*, the first-ever FPS game developed by id Software.  
-In this project, I built a 3D view from a 2D map using **MiniLibX**, a tiny graphical library for C.
+**cub3D** is a raycasting-based 3D maze game developed as part of the curriculum at 1337 School (42 Network).
+Inspired by the legendary Wolfenstein 3D — the pioneer of the first-person shooter genre — this project aims to replicate a basic 3D experience using only 2D data and raw math logic.
 
-The goal is to parse a custom `.cub` map file and render a realistic 3D scene from a first-person point of view.
+With the help of MiniLibX, a minimalistic graphical library, I built a dynamic 3D environment rendered from a 2D map using the raycasting technique. This simulation allows real-time movement, wall detection, and texture mapping — all from scratch in pure C.
+
+🎯 The main objective:
+
+Take a simple .cub map file, parse it, and render a realistic 3D first-person view of a maze, complete with player movement and textured walls — while respecting strict memory management and code standards.
+
+💡 Why this project is exciting:
+It’s where math meets graphics. No OpenGL, no engines, no shortcuts. Just lines, pixels, and your brain.
 
 ---
 
