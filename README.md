@@ -24,6 +24,7 @@ It’s where math meets graphics. No OpenGL, no engines, no shortcuts. Just line
 
 ---
 
+
 ## 🎯 Project Objectives
 
 - ✅ Apply **C programming** with graphics and math
@@ -53,6 +54,10 @@ This method was famously used in games like *Wolfenstein 3D*, and it's the core 
 
 ---
 
+<img width="1275" height="631" alt="image" src="https://github.com/user-attachments/assets/df41d327-7896-46b0-9068-f236afdf9e0d" />
+
+---
+
 ### ✨ Why is it useful?
 
 Raycasting is fast, efficient, and doesn’t require full 3D geometry or heavy graphics engines.  
@@ -65,18 +70,6 @@ It’s perfect for simple games where performance and control matter — and a f
 ### 🔧 In cub3D
 
 Raycasting is used to turn a `.cub` map file into a full 3D environment where you can move, rotate, and interact in real time — with nothing but C, math, and the MiniLibX graphics library.
-
----
-
-### 📚 Recommended Resources
-
-Want to dive deeper? Here are some great resources to understand raycasting better:
-
-- [Lode's Computer Graphics Tutorial](https://lodev.org/cgtutor/raycasting.html) – The most famous and beginner-friendly explanation of raycasting.
-- [Raycasting in C (YouTube)](https://www.youtube.com/watch?v=gYRrGTC7GtA) – Visual walkthrough of how to implement raycasting.
-- [Wikipedia: Ray Casting](https://en.wikipedia.org/wiki/Ray_casting) – Technical overview of the concept.
-- [Permadi’s Raycasting Tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/) – Old-school but very informative.
-
 
 ---
 
@@ -223,6 +216,18 @@ cub3d/
 - 📂 File parsing and validation
 - 🔥 Manual memory management in C
 - 🚪 Map design and file formats
+
+---
+
+### 📚 Recommended Resources
+
+Want to dive deeper? Here are some great resources to understand raycasting better:
+
+- [Lode's Computer Graphics Tutorial](https://www.tldraw.com/p/nrxBdkny-lr8txkRoSnyt?d=v11778.-7245.34934.17485.eLz4W7KpaMOCqJI7W8QwN) – The most famous and beginner-friendly explanation of raycasting.
+- [Lode's Computer Graphics Tutorial](https://aaaa.sh/creatures/dda-algorithm-interactive/) – The most famous and beginner-friendly explanation of raycasting.
+- [Lode's Computer Graphics Tutorial](https://lodev.org/cgtutor/raycasting.html) – The most famous and beginner-friendly explanation of raycasting.
+- [Lode's Computer Graphics Tutorial](https://en.wikipedia.org/wiki/Ray_casting) – The most famous and beginner-friendly explanation of raycasting.
+
 
 ---
 
