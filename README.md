@@ -225,11 +225,10 @@ cub3d/
 
 Want to dive deeper? Here are some great resources to understand raycasting better:
 
-- [Lode's Computer Graphics Tutorial](https://www.tldraw.com/p/nrxBdkny-lr8txkRoSnyt?d=v11778.-7245.34934.17485.eLz4W7KpaMOCqJI7W8QwN) – The most famous and beginner-friendly explanation of raycasting.
-- [Lode's Computer Graphics Tutorial](https://aaaa.sh/creatures/dda-algorithm-interactive/) – The most famous and beginner-friendly explanation of raycasting.
-- [Lode's Computer Graphics Tutorial](https://lodev.org/cgtutor/raycasting.html) – The most famous and beginner-friendly explanation of raycasting.
-- [Lode's Computer Graphics Tutorial](https://en.wikipedia.org/wiki/Ray_casting) – The most famous and beginner-friendly explanation of raycasting.
-
+- [Lode's Computer Graphics Tutorial](https://www.tldraw.com/p/nrxBdkny-lr8txkRoSnyt?d=v11778.-7245.34934.17485.eLz4W7KpaMOCqJI7W8QwN)
+- [Interactive DDA Algorithm](https://aaaa.sh/creatures/dda-algorithm-interactive/)
+- [Lodev Raycasting](https://lodev.org/cgtutor/raycasting.html)
+- [Wikipedia – Ray Casting](https://en.wikipedia.org/wiki/Ray_casting)
 
 ---
 
