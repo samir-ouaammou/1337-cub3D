@@ -90,7 +90,6 @@ Raycasting is used to turn a `.cub` map file into a full 3D environment where yo
 
 ## 💎 Bonus Features
 
-If the mandatory part is 100% perfect, bonus is evaluated:
 
 | Bonus | Description |
 |-------|-------------|
@@ -101,7 +100,6 @@ If the mandatory part is 100% perfect, bonus is evaluated:
 | 🖱️ Mouse Look | Rotate view using mouse movement |
 | 🎯 HUD | Add health bar, weapons, shooting system |
 
-> 💡 You can modify the `.cub` format for bonus as long as it’s well explained in README.
 
 ---
 
