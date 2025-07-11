@@ -1,6 +1,8 @@
+# 🎮 cub3D: Real-Time 3D Engine with Raycasting in C
+
 ## 📖 Introduction
 
-**cub3D** is a raycasting-based 3D maze game developed as part of the curriculum at 1337 School (42 Network).
+**🕹️ cub3D** is a raycasting-based 3D maze game developed as part of the curriculum at 1337 School (42 Network).
 Inspired by the legendary Wolfenstein 3D — the pioneer of the first-person shooter genre — this project aims to replicate a basic 3D experience using only 2D data and raw math logic.
 
 With the help of MiniLibX, a minimalistic graphical library, I built a dynamic 3D environment rendered from a 2D map using the raycasting technique. This simulation allows real-time movement, wall detection, and texture mapping — all from scratch in pure C.
