@@ -181,7 +181,7 @@ cub3d/
 
 7. Run the program:
    ```bash
-   ./cub3D
+   ./cub3D maps/map2.cub
    ```
 | Key      | Action        |
 | -------- | ------------- |
@@ -194,7 +194,9 @@ cub3d/
 | ESC      | Exit          |
 | Red \[X] | Close window  |
 
+---
 
+<img width="1275" height="595" alt="Screenshot from 2025-07-11 19-07-47" src="https://github.com/user-attachments/assets/d684bad2-880f-4ab9-bfa7-8d21c480abb4" />
 
 ---
 
