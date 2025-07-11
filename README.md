@@ -37,19 +37,46 @@ It’s where math meets graphics. No OpenGL, no engines, no shortcuts. Just line
 
 ## 🧠 What is RayCasting?
 
-**Raycasting** is a rendering technique that simulates a 3D environment using 2D maps.  
-In simple words:
+**Raycasting** is a technique used in early 3D games to simulate a 3D perspective from a 2D map.  
+It works by casting imaginary rays from the player's point of view and calculating where each ray hits a wall. The result is a visual illusion of depth — achieved with simple math and logic.
 
-> 📌 "Katdir chi camera f wahed lposition f wahed lmap 2D, katrsel rays f kol direction, w kat7seb fin kaytla9aw m3a les murs bach tsawer 3D wall view."
+This method was famously used in games like *Wolfenstein 3D*, and it's the core rendering engine behind **cub3D**.
 
-### 🔎 How it works:
-- You shoot a **ray for each vertical stripe** of your screen.
-- You calculate the **distance to the wall**.
-- You draw a vertical line whose height depends on that distance.
-- You apply a **texture** depending on wall side (N/S/E/W).
-- You repeat this for every column = illusion of 3D.
+### 🔍 How it works:
 
-Raycasting is **fast** and doesn’t require a full 3D engine.
+1. For every vertical line (column) on the screen, a **ray is cast** into the 2D map.
+2. Using an algorithm like **DDA (Digital Differential Analyzer)**, we detect where the ray **intersects a wall**.
+3. The **distance to the wall** is calculated.
+4. Based on that distance, we draw a **vertical line** on the screen — the closer the wall, the taller the line.
+5. A **texture** is applied depending on which side of the wall was hit (North, South, East, or West).
+6. This process repeats for every column, forming a full frame — creating the illusion of a 3D space.
+
+---
+
+### ✨ Why is it useful?
+
+Raycasting is fast, efficient, and doesn’t require full 3D geometry or heavy graphics engines.  
+It’s perfect for simple games where performance and control matter — and a fantastic way to understand the math behind 3D rendering.
+
+> With raycasting, you're not rendering a world — you're calculating one.
+
+---
+
+### 🔧 In cub3D
+
+Raycasting is used to turn a `.cub` map file into a full 3D environment where you can move, rotate, and interact in real time — with nothing but C, math, and the MiniLibX graphics library.
+
+---
+
+### 📚 Recommended Resources
+
+Want to dive deeper? Here are some great resources to understand raycasting better:
+
+- [Lode's Computer Graphics Tutorial](https://lodev.org/cgtutor/raycasting.html) – The most famous and beginner-friendly explanation of raycasting.
+- [Raycasting in C (YouTube)](https://www.youtube.com/watch?v=gYRrGTC7GtA) – Visual walkthrough of how to implement raycasting.
+- [Wikipedia: Ray Casting](https://en.wikipedia.org/wiki/Ray_casting) – Technical overview of the concept.
+- [Permadi’s Raycasting Tutorial](https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/) – Old-school but very informative.
+
 
 ---
 
