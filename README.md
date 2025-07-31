@@ -240,3 +240,4 @@ Student at [1337 School – UM6P, 42 Network]
 ---
 
 Thank you for checking out my cub3D project! Stay tuned for more exciting challenges. 🔥
+
